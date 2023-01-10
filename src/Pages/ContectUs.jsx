@@ -1,4 +1,11 @@
-import { Box, Flex, Image, Text, useMediaQuery } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Image,
+  Text,
+  useColorMode,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
@@ -11,7 +18,7 @@ function ContectUs(props) {
   // const about = useSelector((store) => store.AboutReducer.about);
   const loading = useSelector((store) => store.AboutReducer.isLoading);
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
-
+  const { colorMode } = useColorMode();
   useEffect(() => {
     dispatch(getAboutData());
   }, [dispatch]);
@@ -61,14 +68,26 @@ function ContectUs(props) {
                     alt={"call"}
                   />
                 </Box>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   Talk with us
                 </Text>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   Interested in Food App's marketing software? Just pick up the
                   phone to chat with a member of our team.
                 </Text>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   <a href="tel:8665562570">+91 8665562570</a>
                 </Text>
               </Box>
@@ -93,14 +112,26 @@ function ContectUs(props) {
                     alt={"call"}
                   />
                 </Box>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   Connect us on mail
                 </Text>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   Sometimes you need a little help from your friends. Don't
                   worry.. we're here for you Contact Support
                 </Text>
-                <Text width={"80%"} my={"5"}>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
                   <a href="mailto: testuser@email.com">testuser@email.com</a>
                 </Text>
               </Box>
