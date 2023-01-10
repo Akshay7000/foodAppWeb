@@ -1,5 +1,3 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -12,14 +10,15 @@ import {
   useColorMode,
   useMediaQuery,
 } from "@chakra-ui/react";
+import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../img/favicon.ico";
 //import { FiUser } from "react-icons/fi";
-import { BsSuitHeart } from "react-icons/bs";
 import { BsBag } from "react-icons/bs";
-import { DarkModeBtn } from "../DarkMode/DarkModeBtn";
 import { useSelector } from "react-redux";
-import SideMenu from "../Sidebar/Sidebar";
+import { DarkModeBtn } from "../DarkMode/DarkModeBtn";
 import Profile from "../Profile/Profile";
+import SideMenu from "../Sidebar/Sidebar";
 
 const Navbar = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
@@ -27,7 +26,7 @@ const Navbar = () => {
   const auth = useSelector((state) => state.AuthReducer.isAuth);
 
   const cart = useSelector((store) => store.cart.cart);
-  const wishlist = useSelector((store) => store.wishReducer.wishlist);
+  // const wishlist = useSelector((store) => store.wishReducer.wishlist);
   const { colorMode } = useColorMode();
   const baseStyle = {
     color: "black",
@@ -47,9 +46,9 @@ const Navbar = () => {
   const handleCart = () => {
     navigate("/cart");
   };
-  const handleHeart = () => {
-    navigate("/wishlist");
-  };
+  // const handleHeart = () => {
+  //   navigate("/wishlist");
+  // };
   const handleSignup = () => {
     navigate("/register");
   };
@@ -108,38 +107,50 @@ const Navbar = () => {
 
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-              to="/men"
+              to="/about"
             >
               <Text
                 color={colorMode === "dark" ? "white" : "black"}
                 my="4"
                 mx="2"
               >
-                Menu 1
+                About Us
               </Text>
             </NavLink>
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-              to="/women"
+              to="/team"
             >
               <Text
                 color={colorMode === "dark" ? "white" : "black"}
                 my="4"
                 mx="2"
               >
-                Menu 2
+                Our Team
               </Text>
             </NavLink>
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-              to="/shoes"
+              to="/contect"
             >
               <Text
                 color={colorMode === "dark" ? "white" : "black"}
                 my="4"
                 mx="2"
               >
-                Menu 3
+                Contact Us
+              </Text>
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+              to="/shoes1"
+            >
+              <Text
+                color={colorMode === "dark" ? "white" : "black"}
+                my="4"
+                mx="2"
+              >
+                Support
               </Text>
             </NavLink>
           </HStack>
@@ -157,7 +168,7 @@ const Navbar = () => {
               as={BsSearch}
             />
           </Box> */}
-
+          {/*
           <Box onClick={handleHeart}>
             <Flex
               onClick={handleCart}
@@ -185,7 +196,7 @@ const Navbar = () => {
                 {wishlist ? wishlist.length : 0}
               </Text>
             </Flex>
-          </Box>
+          </Box> */}
           <Box>
             <Flex
               onClick={handleCart}

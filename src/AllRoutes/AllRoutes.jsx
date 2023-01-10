@@ -1,39 +1,37 @@
 import React from "react";
-import Home from "../Pages/Home";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AllProducts from "../Pages/AllProducts";
-import Men from "../Pages/Men";
-import Women from "../Pages/Women";
 
-import DescriptionPage from "../components/Description/DescriptionPage";
-import AllshoesD from "../Pages/Shoes";
-import Cart from "../Pages/Cart";
-import WishList from "../Pages/WishList";
-import Login from "../Pages/Login";
-import Register from "../Pages/SignUp";
-import Checkout from "../Pages/Checkout";
-import Authentication from "../PrivateRoute/Authentication";
-import MyAccount from "../Pages/MyAccount";
 import AdminPage from "../Admin/AdminPage";
+import DescriptionPage from "../components/Description/DescriptionPage";
+import AboutUs from "../Pages/AboutUs";
+import Cart from "../Pages/Cart";
+import Checkout from "../Pages/Checkout";
+import ContectUs from "../Pages/ContectUs";
+import Login from "../Pages/Login";
+import MyAccount from "../Pages/MyAccount";
+import OurTeam from "../Pages/OurTeam";
+import Register from "../Pages/SignUp";
+import Authentication from "../PrivateRoute/Authentication";
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<AllProducts />} />
 
-        <Route path="/men" element={<Home />} />
-        <Route path="/women" element={<Women />} />
-        <Route path="/shoes" element={<AllshoesD />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/team" element={<OurTeam />} />
+        <Route path="/contect" element={<ContectUs />} />
         <Route path="/description/:id" element={<DescriptionPage />} />
         <Route path="/cart" element={<Cart />} />
-        <Route
+        {/* <Route
           path="/wishlist"
           element={
             <Authentication>
               <WishList />
             </Authentication>
           }
-        />
+        /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/myaccount" element={<MyAccount />} />
 

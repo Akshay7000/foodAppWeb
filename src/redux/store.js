@@ -6,6 +6,8 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import { dataReducer } from "./DataReducer/reducer";
+import { AboutReducer } from "./WebInfoReducer/reducer";
+
 import { reducer as AuthReducer } from "./AuthReducer/reducer";
 import { cartReducer } from "./CartReducer/reducer";
 import { pagesReducer } from "./PagesReducer/reducer";
@@ -19,7 +21,7 @@ const rootReducer = combineReducers({
   AuthReducer,
   pagesReducer,
   wishReducer,
-
+  AboutReducer,
 });
 
 const store = legacy_createStore(
