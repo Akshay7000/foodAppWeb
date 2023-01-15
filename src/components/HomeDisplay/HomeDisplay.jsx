@@ -5,7 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 export const HomeDis = ({ item }) => {
   const navigate = useNavigate();
-  const { id, name, color, gender, images,image,price,productName,rank,weight ,unit="kg" } = item;
+  const {
+    id,
+    name,
+    color,
+    gender,
+    images,
+    image,
+    price,
+    productName,
+    rank,
+    weight,
+    unit = "kg",
+  } = item;
 
   const [img, setImg] = useState(image);
   const [fname, setFname] = useState("normal");
@@ -20,20 +32,26 @@ export const HomeDis = ({ item }) => {
   };
 
   return (
-    <div key={id}
-    //  onMouseEnter={ChangeHoverImage} onMouseLeave={OriginalImage}
-     >
+    <div
+      key={id}
+      //  onMouseEnter={ChangeHoverImage} onMouseLeave={OriginalImage}
+    >
       <Box
         width={["95%", "80%", "80%", "80%"]}
         onClick={() => navigate("/allproducts")}
       >
         <Box overflow={"hidden"} position={"relative"}>
-          <Image className="imageAnimation" src={img} alt={name} />
+          <Image
+            className="imageAnimation"
+            src={img}
+            alt={name}
+            fallbackSrc="https://via.placeholder.com/150"
+          />
         </Box>
-        <Text fontWeight={fname}>{productName}</Text>
-        <Text>
-          {weight+" "+unit}
-        </Text>
+        <Box textTransform={"capitalize"} color={"GrayText"}>
+          <Text fontWeight={fname}>{productName}</Text>
+          <Text>{weight + " " + unit}</Text>
+        </Box>
       </Box>
     </div>
   );

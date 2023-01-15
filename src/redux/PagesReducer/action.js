@@ -23,7 +23,7 @@ const getFeaturedProducts = (params) => async (dispatch) => {
       res.docs?.map((products) => {
         allproducts.push({ ...products.data(), id: products.id });
       });
-      console.log("getFeaturedProducts,", allproducts);
+      // console.log("getFeaturedProducts,", allproducts);
       dispatch({ type: types.GET_MENS_DATA_S, payload: allproducts });
     })
     .then((err) => {

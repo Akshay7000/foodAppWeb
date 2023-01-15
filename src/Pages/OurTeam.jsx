@@ -61,6 +61,7 @@ function OurTeam() {
                       width={"100%"}
                       height={"100%"}
                       objectFit="cover"
+                      fallbackSrc="https://via.placeholder.com/150"
                     />
                   </Box>
 

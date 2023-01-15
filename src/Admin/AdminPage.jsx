@@ -39,7 +39,12 @@ const AdminPage = () => {
             fontSize={["7px", "10px", "12px", "15px"]}
           >
             <Box width={"55px"} mx={"2"}>
-              <Image width={"100%"} src={item.images[0]} alt={item.name} />
+              <Image
+                width={"100%"}
+                src={item.images[0]}
+                alt={item.name}
+                fallbackSrc="https://via.placeholder.com/150"
+              />
             </Box>
             {isLargerThan ? <Box w="15%">{item.name}</Box> : null}
             <Box w="15%">{item.gender}</Box>

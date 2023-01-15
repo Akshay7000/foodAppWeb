@@ -32,46 +32,42 @@ const register = (payload, toast) => (dispatch) => {
       dispatch({ type: types.REGISTER_F, payload: e });
       return e;
     });
-
-  return axios
-    .post("https://nareshrajput-auth.onrender.com/auth/signup", payload)
-    .then((r) => {
-      setToast(toast, "Registered Successful", "success");
-      dispatch({ type: types.REGISTER_S, payload: r.data });
-    })
-    .catch((e) => {
-      setToast(toast, e.response.data.message, "error");
-      dispatch({ type: types.REGISTER_F, payload: e });
-    });
 };
 
 const login = (payload, toast) => (dispatch) => {
   saveLocalData("userInfo", payload.email);
   dispatch({ type: types.LOGIN_R });
-  return auth
-    .signInWithEmailAndPassword(payload.email, payload.password)
-    .then((r) => {
-      setToast(toast, "Login Successful", "success");
-      const user = r.user;
-      console.log(user);
-      dispatch({
-        type: types.LOGIN_S,
-        payload: { email: user.email, uid: user.uid },
-      });
+
+  return users
+    .where("email", "==", "anagaich@moreyeahs.in")
+    .get()
+    .then((res) => {
+      console.log("res", res.empty);
+      if (!res.empty) {
+        return auth
+          .signInWithEmailAndPassword(payload.email, payload.password)
+          .then((r) => {
+            setToast(toast, "Login Successful", "success");
+            const user = r.user;
+            console.log(user);
+            dispatch({
+              type: types.LOGIN_S,
+              payload: { email: user.email, uid: user.uid },
+            });
+          })
+          .catch((e) => {
+            setToast(toast, e.response.data.message, "error");
+            dispatch({ type: types.LOGIN_F, payload: e });
+          });
+      } else {
+        throw "User Not Found";
+      }
     })
-    .catch((e) => {
-      setToast(toast, e.response.data.message, "error");
-      dispatch({ type: types.LOGIN_F, payload: e });
-    });
-  return axios
-    .post("https://nareshrajput-auth.onrender.com/auth/login", payload)
-    .then((r) => {
-      setToast(toast, "Login Successful", "success");
-      dispatch({ type: types.LOGIN_S, payload: r.data.token });
-    })
-    .catch((e) => {
-      setToast(toast, e.response.data.message, "error");
-      dispatch({ type: types.LOGIN_F, payload: e });
+    .catch((err) => {
+      console.log("error", err);
+      setToast(toast, err, "error");
+      dispatch({ type: types.LOGIN_F, payload: err });
+      throw err;
     });
 };
 
@@ -87,19 +83,6 @@ const profile = (payload) => async (dispatch) => {
       });
     })
     .catch((e) => dispatch({ type: types.PROFILE_F, payload: e }));
-  // const options = {
-  //   method: "GET",
-  //   url: `https://nareshrajput-auth.onrender.com/auth/${payload.email}`,
-  //   headers: { Authorization: `Bearer ${payload.token}` },
-  // };
-  // return axios(options)
-  //   .then((r) => {
-  //     dispatch({
-  //       type: types.PROFILE_S,
-  //       payload: r.data,
-  //     });
-  //   })
-  //   .catch((e) => dispatch({ type: types.PROFILE_F, payload: e }));
 };
 
 export { login, register, profile };

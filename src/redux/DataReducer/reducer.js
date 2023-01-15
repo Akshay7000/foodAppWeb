@@ -19,7 +19,7 @@ const dataReducer = (state = init, action) => {
       return {
         ...state,
         isLoading: false,
-        isError:false,
+        isError: false,
         products: payload,
       };
     }

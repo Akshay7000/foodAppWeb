@@ -16,22 +16,22 @@ import {
 } from "../components/Other/CheckProperty";
 import { displayRazorpay } from "../components/rozarpay/RozarPay";
 
-const initialState = {
-  firstName: "",
-  lastName: "",
-  addressLine1: "",
-  addressLine2: "",
-  locality: "",
-  pinCode: "",
-  state: "",
-  country: "",
-  email: "",
-  mobile: "",
-};
-
 const Checkout = () => {
   const cart = useSelector((store) => store.cart.cart);
   const profileData = useSelector((state) => state.AuthReducer?.profileData);
+
+  const initialState = {
+    firstName: profileData?.firstName,
+    lastName: profileData?.lastName,
+    addressLine1: "",
+    addressLine2: "",
+    locality: "",
+    pinCode: "",
+    state: "",
+    country: "India",
+    email: profileData?.email,
+    mobile: profileData?.mobile,
+  };
   const [dis, setDis] = useState("");
   const toast = useToast();
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ const Checkout = () => {
     if (!handleFormValidation(form)) {
       return;
     } else {
-      displayRazorpay(price, form, navigate,profileImg,dispatch);
+      displayRazorpay(price, form, navigate, profileImg, dispatch);
     }
   };
   // =====================Login Down========================================================================
@@ -107,7 +107,7 @@ const Checkout = () => {
   // ===========================Login UP===============================================================
   return (
     <div>
-       <Navbar/> <br/>
+      <Navbar /> <br />
       <Flex
         m={isLargerThan ? "3rem" : "1rem"}
         mt="5rem"
@@ -119,6 +119,7 @@ const Checkout = () => {
           onChange={handleOnChange}
           FormSubmit={handleSubmit}
           total_discount={total_discount}
+          value={form}
         />
         {/* ---------------------------------place order --------------------------------------------------- */}
         <Box width={["95%", "90%", "40%", "40%"]} m="auto" min-h="100vh">

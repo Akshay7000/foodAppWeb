@@ -63,7 +63,7 @@ const Profile = ({ colorMode }) => {
           color="black"
           as={Button}
           colorScheme="none"
-          rightIcon={<ChevronDownIcon ml={"-15px"} fontSize={"20px"} />}
+          // rightIcon={<ChevronDownIcon ml={"5px"} fontSize={"20px"} />}
         >
           <Avatar
             size={"sm"}
@@ -72,21 +72,26 @@ const Profile = ({ colorMode }) => {
           />
           <Text
             fontSize={"xs"}
+            my={"1"}
             color={colorMode === "dark" ? "white" : "black"}
+            textTransform={"capitalize"}
           >
             {profileData.length !== 0 ? profileData.firstName : ""}
           </Text>
         </MenuButton>
         <MenuList>
           <MenuGroup>
-            <MenuItem fontWeight={"bold"}>
-              {profileData.length !== 0 ? profileData?.firstName+" "+ profileData?.lastName: ""}
+            <MenuItem fontWeight={"bold"} textTransform={"capitalize"}>
+              {profileData.length !== 0
+                ? profileData?.firstName + " " + profileData?.lastName
+                : ""}
             </MenuItem>
             <MenuDivider />
             {auth ? (
               <MenuItem onClick={() => navigate("/myaccount")}>
                 <Avatar
                   size={"xs"}
+                  marginRight={"2"}
                   name={profileData.length !== 0 ? profileData.firstName : ""}
                   src={profileData.length !== 0 ? profileData.description : ""}
                 />
@@ -100,18 +105,17 @@ const Profile = ({ colorMode }) => {
               </MenuItem>
             )}
 
-
-            <MenuItem onClick={() => navigate("/wishlist")}>
+            {/* <MenuItem onClick={() => navigate("/wishlist")}>
               <MdOutlineFavoriteBorder color={"red"} />
               Wishlist
+            </MenuItem> */}
+            <MenuItem onClick={() => navigate("/cart")} mx={"1"}>
+              <BsCartCheck color={"blue"} marginRight={"2"} />
+              <Text marginLeft={"2"}>Cart</Text>
             </MenuItem>
-            <MenuItem onClick={() => navigate("/cart")}>
-              <BsCartCheck color={"blue"} />
-              Cart
-            </MenuItem>
-            <MenuItem onClick={logoutHandler}>
+            <MenuItem onClick={logoutHandler} mx={"1"}>
               <GrLogout />
-              Logout
+              <Text marginLeft={"2"}>Logout</Text>
             </MenuItem>
           </MenuGroup>
         </MenuList>

@@ -6,8 +6,23 @@ import { StarIcon } from "@chakra-ui/icons";
 
 const ProductDis = ({ item }) => {
   const navigate = useNavigate();
-  const { id, name, color, gender, images, final_price, reviews, rating,description,image,price,productName,rank,weight ,unit="kg"} =
-    item;
+  const {
+    id,
+    name,
+    color,
+    gender,
+    images,
+    final_price,
+    reviews,
+    rating,
+    description,
+    image,
+    price,
+    productName,
+    rank,
+    weight,
+    unit = "kg",
+  } = item;
   const [img, setImg] = useState(image);
   const handleDes = () => {
     navigate(`/description/${id}`);
@@ -23,26 +38,38 @@ const ProductDis = ({ item }) => {
     <div>
       <Box
         key={id}
-
         m="auto"
         // onMouseEnter={ChangeHoverImage}
         // onMouseLeave={OriginalImage}
         onClick={handleDes}
         my={"3"}
-
       >
-        <Box overflow={"hidden"} position={"relative"}
-        height={"300px"} width={"95%"}>
-          <Image className="imageAnimation" src={img} alt={name} fallbackSrc='https://via.placeholder.com/150' />
+        <Box
+          overflow={"hidden"}
+          position={"relative"}
+          height={"300px"}
+          width={"95%"}
+          borderRadius={"15px"}
+        >
+          <Image
+            className="imageAnimation"
+            src={img}
+            alt={name}
+            fallbackSrc="https://via.placeholder.com/150"
+          />
         </Box>
         <Box
           textAlign={"left"}
           color={"darkgrey"}
           fontSize={["xs", "sm", "md", "md"]}
+          textTransform={"capitalize"}
         >
           <Text>{productName}</Text>
 
-          <Text>{weight}{unit}</Text>
+          <Text>
+            {weight}
+            {unit}
+          </Text>
         </Box>
         <Flex
           justify={"left"}
@@ -50,7 +77,11 @@ const ProductDis = ({ item }) => {
           fontWeight={"medium"}
           align={"center"}
         >
-          <Text as={Flex} alignItems={"center"}  fontSize={["xs", "sm", "md", "md"]}>
+          <Text
+            as={Flex}
+            alignItems={"center"}
+            fontSize={["xs", "sm", "md", "md"]}
+          >
             <Icon as={StarIcon} color="yellow.500" /> : {rank}
           </Text>
           <Text fontSize={["xs", "sm", "md", "md"]}>Review : ({rank}) </Text>

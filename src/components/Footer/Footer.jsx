@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <div className="Footer">
       <Box
-        bg="black"
+        bg="#000  "
         color="whitesmoke"
         height={isSmallerThan ? "50vh" : "50vh"}
         pt="3rem"
@@ -35,10 +35,18 @@ const Footer = () => {
         >
           <Box as={Flex} flexDirection="column">
             <Heading>Product</Heading>
-            <Text as={Link} to="/allproducts?gender=MEN">Mens Collection</Text>
-            <Text as={Link} to="/allproducts?gender=WOMEN">Womens Collection</Text>
-            <Text as={Link} to="/allproducts?category=shoes" >Shoes Collection</Text>
-            <Text as={Link} to="/allproducts?category=clothes">Clothes Collection</Text>
+            <Text as={Link} to="/allproducts?gender=MEN">
+              Mens Collection
+            </Text>
+            <Text as={Link} to="/allproducts?gender=WOMEN">
+              Womens Collection
+            </Text>
+            <Text as={Link} to="/allproducts?category=shoes">
+              Shoes Collection
+            </Text>
+            <Text as={Link} to="/allproducts?category=clothes">
+              Clothes Collection
+            </Text>
           </Box>
 
           {isSmallerThan ? (

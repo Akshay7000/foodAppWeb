@@ -66,6 +66,7 @@ function ContectUs(props) {
                     width={"100%"}
                     height={"100%"}
                     alt={"call"}
+                    fallbackSrc="https://via.placeholder.com/150"
                   />
                 </Box>
                 <Text

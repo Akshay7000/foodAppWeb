@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../img/favicon.ico";
+import logo from "../../img/icon.png";
 //import { FiUser } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -34,10 +34,10 @@ const Navbar = () => {
   };
 
   const activeStyle = {
-    color: "#027bff",
+    color: "#13acbc",
     textDecoration: "none",
     transition: "0.5s",
-    borderBottom: "2px solid black",
+    borderBottom: "2px solid #13acbc",
   };
 
   const handleHome = () => {
@@ -57,38 +57,47 @@ const Navbar = () => {
       <Flex
         h={"9vh"}
         display="flex"
-        justifyContent={"right"}
-        gap="10px"
+        justifyContent={"space-between"}
+        // gap="10px"
         alignItems={"center"}
-        bg={colorMode === "dark" ? "none" : "#ebecec"}
+        bg={colorMode === "dark" ? "none" : "#13acbc"}
+        px={isLargerThan ? 10 : 5}
       >
-        {auth ? (
-          <Box>
-            <Profile colorMode={colorMode} />
+        <HStack onClick={handleHome} cursor={"pointer"}>
+          <Image
+            width={["70px"]}
+            m={2}
+            src={logo}
+            alt="logo"
+            fallbackSrc="https://via.placeholder.com/150"
+          />
+        </HStack>
+        <HStack>
+          {auth ? (
+            <Box>
+              <Profile colorMode={colorMode} />
+            </Box>
+          ) : (
+            <Button
+              bg={"black"}
+              color={"whitesmoke"}
+              border={"1px solid beige"}
+              _hover={{
+                bg: "none",
+                color: "teal",
+              }}
+              onClick={handleSignup}
+            >
+              Sign up
+            </Button>
+          )}
+          <Box mr={["5", "6", "7", "9"]}>
+            {" "}
+            <DarkModeBtn />
           </Box>
-        ) : (
-          <Button
-            bg={"black"}
-            color={"whitesmoke"}
-            border={"1px solid beige"}
-            _hover={{
-              bg: "none",
-              color: "teal",
-            }}
-            onClick={handleSignup}
-          >
-            Sign up
-          </Button>
-        )}
-        <Box mr={["5", "6", "7", "9"]}>
-          {" "}
-          <DarkModeBtn />
-        </Box>
+        </HStack>
       </Flex>
       <Flex fontWeight="bold">
-        <HStack onClick={handleHome} cursor={"pointer"}>
-          <Image width={["25px"]} m={5} src={logo} alt="logo" />
-        </HStack>
         <Spacer />
         {isLargerThan ? (
           <HStack>
@@ -213,6 +222,13 @@ const Navbar = () => {
                 p="0rem 0.3rem"
                 bg="blue.500"
                 color="white"
+                textAlign={"center"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                display={"flex"}
+                fontSize={12}
+                w={6}
+                h={6}
               >
                 {cart ? cart.length : 0}
               </Text>

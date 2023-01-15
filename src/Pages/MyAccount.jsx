@@ -1,59 +1,84 @@
-import { Box, Flex, Heading, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Image, Text, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
-import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import Navbar from "../components/Navbar/Navbar";
+import man from "../img/men1.png";
 const MyAccount = () => {
+  const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const profileData = useSelector((state) => state.AuthReducer?.profileData);
-  console.log(profileData)
+
   return (
     <div>
+      <Navbar />
       <Box
-        m="2rem"
-        className="myaccount"
-        h={"100vh"}
-        bgImage={"linear-gradient(skyblue,royalblue)"}
+        h={isLargerThan && "100vh"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        marginTop={!isLargerThan && 20}
       >
-        <Heading w={"80%"} m={"auto"} className="heading">
-          Hi! {profileData.length !== 0 ? profileData.name : "User"}! Thank you
-          for visiting my website! My name is Naresh Rajput and I hope you like
-          my Website.
-        </Heading>
-        <Flex
-          alignItems={"center"}
-          alignContent={"center"}
-          h={"50vh"}
-          w={"50%"}
-          m={"auto"}
-          my={"5"}
+        {/* <Navbar /> <br /> */}
+
+        <Box
+          h={isLargerThan && "80%"}
+          w={"80%"}
+          display={"flex"}
+          boxShadow="2xl"
+          flexDirection={isLargerThan ? "row" : "column"}
         >
-          <Heading className="heading"> Follow Me : </Heading>
-          <Flex justifyContent={"space-evenly"}>
-            <Tooltip label="Follow Me On Github" color="white">
-              <Box>
-                <Text>
-                  <a href="https://github.com/nmewada01" alt={"nmewada01"}>
-                    <AiFillGithub fontSize={"45px"} />
-                  </a>
-                </Text>
-              </Box>
-            </Tooltip>
-            <Tooltip label="Follow Me On Linkedin" color="white">
-              <Box>
-                <Text>
-                  <a
-                    href="https://www.linkedin.com/in/naresh-rajput/"
-                    alt={"Naresh Rajput"}
-                  >
-                    <AiFillLinkedin fontSize={"50px"} />
-                  </a>
-                </Text>
-              </Box>
-            </Tooltip>
-          </Flex>
-        </Flex>
-        <Text fontSize={"30px"} color="white">
-          Have A Great Day!
-        </Text>
+          <Box
+            w={isLargerThan ? "50%" : "100%"}
+            h={"100%"}
+            backgroundColor={"#13acbc"}
+          >
+            <Image
+              src={man}
+              w={"100%"}
+              h={"100%"}
+              objectFit={"contain"}
+              fallbackSrc="https://via.placeholder.com/150"
+            />
+          </Box>
+          <Box
+            w={isLargerThan ? "50%" : "100%"}
+            h={"100%"}
+            textAlign="start"
+            px={isLargerThan ? "20" : "5  "}
+            py={50}
+            textTransform={"capitalize  "}
+          >
+            <Box my={2} fontSize={["xs", "sm", "md", "md"]}>
+              <Text color={"GrayText"}>First Name</Text>
+              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
+                {profileData?.firstName}
+              </Text>
+            </Box>
+            <Box my={2}>
+              <Text color={"GrayText"}>Last Name</Text>
+              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
+                {profileData?.lastName}
+              </Text>
+            </Box>
+            <Box my={2}>
+              <Text color={"GrayText"}>Email Address</Text>
+              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
+                {profileData?.email}
+              </Text>
+            </Box>
+            <Box my={2}>
+              <Text color={"GrayText"}>Phone Number</Text>
+              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
+                +91 {profileData?.mobile}
+              </Text>
+            </Box>
+            <Box my={2}>
+              <Text color={"GrayText"}>Address</Text>
+              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
+                2349 Barfani Dham M.R.9, Indore M.P 452010
+              </Text>
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </div>
   );

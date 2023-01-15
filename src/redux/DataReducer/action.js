@@ -12,15 +12,7 @@ const getData = (params) => async (dispatch) => {
       console.log("getItem,", allproducts);
       dispatch({ type: types.GET_DATA_S, payload: allproducts });
     })
-    .then((err) => {
-      dispatch({ type: types.GET_DATA_F });
-    });
-  return axios
-    .get(`${process.env.REACT_APP_BASE_API}/allproducts`, params)
-    .then((res) => {
-      dispatch({ type: types.GET_DATA_S, payload: res.data });
-    })
-    .then((err) => {
+    .catch((err) => {
       dispatch({ type: types.GET_DATA_F });
     });
 };

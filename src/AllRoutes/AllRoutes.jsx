@@ -23,7 +23,7 @@ const AllRoutes = () => {
         <Route path="/team" element={<OurTeam />} />
         <Route path="/contect" element={<ContectUs />} />
         <Route path="/description/:id" element={<DescriptionPage />} />
-        <Route path="/cart" element={<Cart />} />
+
         {/* <Route
           path="/wishlist"
           element={
@@ -33,14 +33,29 @@ const AllRoutes = () => {
           }
         /> */}
         <Route path="/login" element={<Login />} />
-        <Route path="/myaccount" element={<MyAccount />} />
-
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/myaccount"
+          element={
+            <Authentication>
+              <MyAccount />
+            </Authentication>
+          }
+        />
+
         <Route
           path="/checkout"
           element={
             <Authentication>
               <Checkout />
+            </Authentication>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <Authentication>
+              <Cart />
             </Authentication>
           }
         />

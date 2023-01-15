@@ -7,7 +7,7 @@ import { removeWishList } from "../../redux/WishReducer/action";
 import { CloseIcon } from "@chakra-ui/icons";
 
 const WishListShow = ({ item }) => {
-  const { image, productName, price,id, description } = item;
+  const { image, productName, price, id, description } = item;
   const [prices, setPrice] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,14 +28,18 @@ const WishListShow = ({ item }) => {
       <Button onClick={() => handleRemoveWishList(id)}>
         <CloseIcon color={"red"} />
       </Button>
-      <Stack h={['35vh','60vh','60vh']}>
+      <Stack h={["35vh", "60vh", "60vh"]}>
         <Box
           onMouseEnter={hanldeWishhover}
           onMouseLeave={handleWishLeave}
           onClick={() => handleWish(id)}
           border={prices && "1px solid teal"}
         >
-          <Image src={image} alt={productName} />
+          <Image
+            src={image}
+            alt={productName}
+            fallbackSrc="https://via.placeholder.com/150"
+          />
           <Text fontWeight={"lightbold"}>{productName}</Text>
           {prices && (
             <Flex fontWeight={"bold"} justifyContent={"space-around"}>
