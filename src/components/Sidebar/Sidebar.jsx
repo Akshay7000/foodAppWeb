@@ -53,6 +53,11 @@ export default function SideMenu({ colorMode }) {
                   Contact Us
                 </Text>
               </Link>
+              <Link to="/support">
+                <Text my="4" mx="2">
+                  Support
+                </Text>
+              </Link>
             </Stack>
           </DrawerBody>
         </DrawerContent>

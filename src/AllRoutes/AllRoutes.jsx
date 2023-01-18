@@ -12,7 +12,9 @@ import Login from "../Pages/Login";
 import MyAccount from "../Pages/MyAccount";
 import OurTeam from "../Pages/OurTeam";
 import Register from "../Pages/SignUp";
+import Support from "../Pages/Support";
 import Authentication from "../PrivateRoute/Authentication";
+
 const AllRoutes = () => {
   return (
     <div>
@@ -23,7 +25,7 @@ const AllRoutes = () => {
         <Route path="/team" element={<OurTeam />} />
         <Route path="/contact" element={<ContectUs />} />
         <Route path="/description/:id" element={<DescriptionPage />} />
-
+        <Route path="/support" element={<Support />} />
         {/* <Route
           path="/wishlist"
           element={
