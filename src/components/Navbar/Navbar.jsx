@@ -66,6 +66,7 @@ const Navbar = () => {
         <HStack onClick={handleHome} cursor={"pointer"}>
           <Image
             width={["70px"]}
+            height="100%"
             m={2}
             src={logo}
             alt="logo"

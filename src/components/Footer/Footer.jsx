@@ -54,6 +54,7 @@ const Footer = () => {
             </Text> */}
 
             <Avatar
+              alt={"testimage"}
               size={isSmallerThan ? "2xl" : "lg"}
               my="1rem"
               bg="white"
