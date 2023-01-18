@@ -29,7 +29,7 @@ export default function SideMenu({ colorMode }) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Sports K</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">Avyaya Health</DrawerHeader>
           <DrawerBody>
             <Stack>
               <Link to="/">
@@ -38,19 +38,19 @@ export default function SideMenu({ colorMode }) {
                 </Text>
               </Link>
 
-              <Link to="/men">
+              <Link to="/about">
                 <Text my="4" mx="2">
-                  Men
+                  About Us
                 </Text>
               </Link>
-              <Link to="/women">
+              <Link to="/team">
                 <Text my="4" mx="2">
-                  Women
+                  Our team
                 </Text>
               </Link>
-              <Link to="/shoes">
+              <Link to="/contact">
                 <Text my="4" mx="2">
-                  Shoes
+                  Contact Us
                 </Text>
               </Link>
             </Stack>

@@ -48,7 +48,12 @@ const cartReducer = (state = init, action) => {
         }
       });
 
-      return { ...state, cart: newChangeCart };
+      return {
+        ...state,
+        cart: newChangeCart,
+        isLoading: false,
+        isError: false,
+      };
     }
 
     case data.DEC_QTY: {
@@ -60,17 +65,27 @@ const cartReducer = (state = init, action) => {
         }
       });
 
-      return { ...state, cart: newChangeCart };
+      return {
+        ...state,
+        cart: newChangeCart,
+        isLoading: false,
+        isError: false,
+      };
     }
 
     case data.REMOVE_QTY: {
       let blankTheCart = state.cart.filter((item) => {
         return !(item.qty === payload.qty && item.id === payload.id);
       });
-      return { ...state, cart: blankTheCart };
+      return { ...state, cart: blankTheCart, isLoading: false, isError: false };
     }
     case data.CLEAR_QTY: {
-      return { ...state, cart: (state.cart = []) };
+      return {
+        ...state,
+        cart: (state.cart = []),
+        isLoading: false,
+        isError: false,
+      };
     }
     case data.GET_CART_R: {
       return {

@@ -9,7 +9,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import React from "react";
-import portfolio from "../../img/portfolio.png";
+import portfolio from "../../img/icon.png";
 import { BsGithub, BsLinkedin, BsInstagram, BsFacebook } from "react-icons/bs";
 // import { GiCondorEmblem } from "react-icons/gi";
 import { Link } from "react-router-dom";
@@ -33,8 +33,13 @@ const Footer = () => {
           fontSize={["sm", "md", "md", "md"]}
           flexDirection={isSmallerThan ? "row" : "column"}
         >
-          <Box as={Flex} flexDirection="column">
-            <Heading>Product</Heading>
+          <Box
+            as={Flex}
+            flexDirection="column"
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            {/*
             <Text as={Link} to="/allproducts?gender=MEN">
               Mens Collection
             </Text>
@@ -46,7 +51,10 @@ const Footer = () => {
             </Text>
             <Text as={Link} to="/allproducts?category=clothes">
               Clothes Collection
-            </Text>
+            </Text> */}
+
+            <Avatar w={20} h={20} my="1rem" bg="white" src={portfolio} />
+            <Heading>Avyaya Health</Heading>
           </Box>
 
           {isSmallerThan ? (

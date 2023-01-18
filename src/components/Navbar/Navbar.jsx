@@ -140,7 +140,7 @@ const Navbar = () => {
             </NavLink>
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-              to="/contect"
+              to="/contact"
             >
               <Text
                 color={colorMode === "dark" ? "white" : "black"}
