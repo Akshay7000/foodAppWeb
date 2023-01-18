@@ -85,21 +85,21 @@ const Footer = () => {
           ) : null}
           <Box mt="1rem" display={"flex"} gap="1rem" justifyContent={"center"}>
             <a
-              // href="https://www.linkedin.com/in/naresh-rajput/"
+              href="https://avyayahealth.vercel.app/"
               target={"_blank"}
               rel="noreferrer"
             >
               <Icon w={9} h={9} my="1rem" as={BsLinkedin} />
             </a>
             <a
-              // href="https://github.com/nmewada01"
+              href="https://avyayahealth.vercel.app/"
               target={"_blank"}
               rel="noreferrer"
             >
               <Icon w={9} h={9} my="1rem" as={BsFacebook} />
             </a>
             <a
-              // href="https://nmewada01.github.io/portfolio/"
+              href="https://avyayahealth.vercel.app/"
               target={"_blank"}
               rel="noreferrer"
             >
