@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import portfolio from "../../img/portfolio.png";
-import { BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsInstagram, BsFacebook } from "react-icons/bs";
 // import { GiCondorEmblem } from "react-icons/gi";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -71,25 +71,26 @@ const Footer = () => {
           ) : null}
           <Box mt="1rem" display={"flex"} gap="1rem" justifyContent={"center"}>
             <a
-              href="https://www.linkedin.com/in/naresh-rajput/"
+              // href="https://www.linkedin.com/in/naresh-rajput/"
               target={"_blank"}
               rel="noreferrer"
             >
               <Icon w={9} h={9} my="1rem" as={BsLinkedin} />
             </a>
             <a
-              href="https://github.com/nmewada01"
+              // href="https://github.com/nmewada01"
               target={"_blank"}
               rel="noreferrer"
             >
-              <Icon w={9} h={9} my="1rem" as={BsGithub} />
+              <Icon w={9} h={9} my="1rem" as={BsFacebook} />
             </a>
             <a
-              href="https://nmewada01.github.io/portfolio/"
+              // href="https://nmewada01.github.io/portfolio/"
               target={"_blank"}
               rel="noreferrer"
             >
-              <Avatar w={10} h={10} my="1rem" bg="white" src={portfolio} />
+              <Icon w={9} h={9} my="1rem" as={BsInstagram} />
+              {/* <Avatar w={10} h={10} my="1rem" bg="white" src={portfolio} /> */}
             </a>
           </Box>
         </Flex>
