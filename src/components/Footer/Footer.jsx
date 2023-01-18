@@ -53,7 +53,12 @@ const Footer = () => {
               Clothes Collection
             </Text> */}
 
-            <Avatar w={20} h={20} my="1rem" bg="white" src={portfolio} />
+            <Avatar
+              size={isSmallerThan ? "2xl" : "lg"}
+              my="1rem"
+              bg="white"
+              src={portfolio}
+            />
             <Heading>Avyaya Health</Heading>
           </Box>
 
