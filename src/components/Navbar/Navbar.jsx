@@ -91,10 +91,9 @@ const Navbar = () => {
               Sign up
             </Button>
           )}
-          <Box mr={["5", "6", "7", "9"]}>
-            {" "}
+          {/* <Box mr={["5", "6", "7", "9"]}>
             <DarkModeBtn />
-          </Box>
+          </Box> */}
         </HStack>
       </Flex>
       <Flex fontWeight="bold">
