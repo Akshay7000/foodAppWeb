@@ -50,19 +50,21 @@ const Trending = () => {
   };
   return (
     <div>
-      <Box border="1px solid beige" >
-      <link
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      />
-        <Heading align={"left"}> TOP PICS FOR YOU</Heading>
+      <Box border="1px solid beige">
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charSet="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
+        <Heading align={"left"} textTransform={"uppercase"} my={5}>
+          Try Something Deferent
+        </Heading>
         <Slider {...settings}>
           {mensD?.length > 0 &&
             mensD.map((item) => {

@@ -122,9 +122,9 @@ const DescriptionPage = () => {
             <Box my={"6"} fontSize={["sm", "md", "lg", "xl"]} border={"none"}>
               <Text fontSize={"lg"}>
                 MRP :
-                <span style={{ textDecoration: "line-through" }}>
+                {/* <span style={{ textDecoration: "line-through" }}>
                   ₹{currentProducts.price}.00
-                </span>
+                </span> */}
                 <span
                   style={{
                     color: "red",

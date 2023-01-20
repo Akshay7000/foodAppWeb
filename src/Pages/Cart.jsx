@@ -131,9 +131,9 @@ const Cart = () => {
                           <Flex justifyContent={"space-between"}>
                             <Text>{item.productName} </Text>
                             <Box>
-                              <Text as="s" color="red" fontWeight={"bold"}>
+                              {/* <Text as="s" color="red" fontWeight={"bold"}>
                                 ₹{item.price}
-                              </Text>
+                              </Text> */}
                               <Text>₹{item.price}</Text>
                             </Box>
                           </Flex>
