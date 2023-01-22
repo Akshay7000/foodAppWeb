@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addToCart } from "../../redux/CartReducer/action";
 import { getData } from "../../redux/DataReducer/action";
 import { addToWishList } from "../../redux/WishReducer/action";
@@ -23,12 +23,12 @@ const DescriptionPage = () => {
   const toast = useToast();
   const products = useSelector((store) => store.dataReducer.products);
   const cart = useSelector((store) => store.cart.cart);
-
   const profile = useSelector((state) => state.AuthReducer?.profileData);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [currentProducts, setCurrentProducts] = useState({});
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
+  const auth = useSelector((state) => state.AuthReducer.isAuth);
   const [size, setSize] = useState(null);
   useEffect(() => {
     if (products.length === 0) {
@@ -44,9 +44,13 @@ const DescriptionPage = () => {
   }, [id, products]);
 
   const handleCart = () => {
-    console.log("currentProducts", { currentProducts, uid: profile.uid });
-    dispatch(addToCart({ currentProducts, uid: profile.uid }));
-    setToast(toast, `${currentProducts.productName} Added To Bag`, "success");
+    if (auth) {
+      console.log("currentProducts", { currentProducts, uid: profile.uid });
+      dispatch(addToCart({ currentProducts, uid: profile.uid }));
+      setToast(toast, `${currentProducts.productName} Added To Bag`, "success");
+    } else {
+      navigate("/login");
+    }
   };
   // const handleWishList = () => {
   //   let payload = {
