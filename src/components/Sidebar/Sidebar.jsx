@@ -37,7 +37,16 @@ export default function SideMenu({ colorMode }) {
                   Home
                 </Text>
               </Link>
-
+              <Link to="/products">
+                <Text my="4" mx="2">
+                  Products
+                </Text>
+              </Link>
+              <Link to="/something-new">
+                <Text my="4" mx="2">
+                  Something New
+                </Text>
+              </Link>
               <Link to="/about">
                 <Text my="4" mx="2">
                   About Us
@@ -51,11 +60,6 @@ export default function SideMenu({ colorMode }) {
               <Link to="/contact">
                 <Text my="4" mx="2">
                   Contact Us
-                </Text>
-              </Link>
-              <Link to="/support">
-                <Text my="4" mx="2">
-                  Support
                 </Text>
               </Link>
             </Stack>

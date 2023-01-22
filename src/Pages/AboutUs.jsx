@@ -81,6 +81,7 @@ function AboutUs() {
                 <Image width={"100%"} src={Vision} borderRadius={"2xl"} />
               </Box>
             </Flex>
+            <br />
             <Flex flexDirection={isLargerThan ? "row" : "column"}>
               <Box width={"100%"} height={"50%"}>
                 <Image width={"100%"} src={Mission} borderRadius={"2xl"} />
