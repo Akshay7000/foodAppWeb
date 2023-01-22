@@ -24,7 +24,7 @@ import milkBottels from "../img/milkBottels.jpg";
 const Home = () => {
   const loading = useSelector((store) => store.pagesReducer.isLoading);
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div>
       <Navbar />
