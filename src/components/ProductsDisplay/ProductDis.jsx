@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { AiOutlineStar } from "react-icons/ai";
@@ -39,10 +39,13 @@ const ProductDis = ({ item }) => {
       <Box
         key={id}
         m="auto"
-        // onMouseEnter={ChangeHoverImage}
-        // onMouseLeave={OriginalImage}
         onClick={handleDes}
         my={"3"}
+        border={"1px solid #d2d2d2b0"}
+        p={"2"}
+        borderRadius={"15px"}
+        boxShadow={"xl"}
+        h={"100%"}
       >
         <Box
           overflow={"hidden"}
@@ -50,7 +53,21 @@ const ProductDis = ({ item }) => {
           height={"300px"}
           width={"95%"}
           borderRadius={"15px"}
+          m="auto"
         >
+          <Badge
+            // colorScheme="green"
+            position={"absolute"}
+            zIndex={"banner"}
+            left={0}
+            top={5}
+            px={"2"}
+            bg={"#13acbc"}
+          >
+            <Text fontWeight={"semibold"} fontSize={["sm", "md", "lg", "xl"]}>
+              ₹{price}.00
+            </Text>
+          </Badge>
           <Image
             className="imageAnimation"
             src={img}
@@ -59,36 +76,28 @@ const ProductDis = ({ item }) => {
           />
         </Box>
         <Box
-          textAlign={"left"}
-          color={"darkgrey"}
+          color={"darkgray"}
           fontSize={["xs", "sm", "md", "md"]}
           textTransform={"capitalize"}
+          justifyContent={"space-between"}
+          display={"flex"}
+          alignItems={"baseline"}
+          mx={"4"}
+          my={"2"}
         >
-          <Text>{productName}</Text>
+          <Text fontSize={"2xl"}>{productName ? productName : "-"}</Text>
 
-          <Text>
-            {weight}
-            {unit}
+          <Text color={"#13acbc"} fontWeight={"bold "}>
+            {weight ? weight : "-"} {unit}
           </Text>
         </Box>
-        <Flex
-          justify={"left"}
-          gap={"2rem"}
-          fontWeight={"medium"}
-          align={"center"}
-        >
+        <HStack textAlign={"left"} my={"2"} mx={"4"}>
           <Text
-            as={Flex}
-            alignItems={"center"}
-            fontSize={["xs", "sm", "md", "md"]}
+            fontSize={["sm", "md"]}
+            textTransform={"capitalize"}
+            noOfLines={2}
           >
-            <Icon as={StarIcon} color="yellow.500" /> : {rank}
-          </Text>
-          <Text fontSize={["xs", "sm", "md", "md"]}>Review : ({rank}) </Text>
-        </Flex>
-        <HStack justify={"left"}>
-          <Text fontWeight={"semibold"} fontSize={["sm", "md", "lg", "xl"]}>
-            ₹{price}.00
+            {description}
           </Text>
         </HStack>
       </Box>

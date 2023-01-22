@@ -14,12 +14,16 @@ import OurTeam from "../Pages/OurTeam";
 import Register from "../Pages/SignUp";
 import Support from "../Pages/Support";
 import Authentication from "../PrivateRoute/Authentication";
+import SomethingNew from "../Pages/SomethingNew";
+import Home from "../Pages/Home";
 
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<AllProducts />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<AllProducts />} />
+        <Route path="/something-new" element={<SomethingNew />} />
 
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<OurTeam />} />

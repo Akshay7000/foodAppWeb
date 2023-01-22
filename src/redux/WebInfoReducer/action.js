@@ -4,12 +4,21 @@ import { WebSettings } from "../../Firebase/Collection";
 const getAboutData = (params) => async (dispatch) => {
   dispatch({ type: types.GET_ABOUT_R });
   // return await WebSettings.doc("about").get((res) => console.log("res", res));
+  var goals = await WebSettings.doc("goal").get();
+  var mission = await WebSettings.doc("mission").get();
+  var vision = await WebSettings.doc("vision").get();
 
   return await WebSettings.doc("about")
     .get()
     .then((res) => {
-      console.log("getItem,", res.data());
-      dispatch({ type: types.GET_ABOUT_S, payload: res.data() });
+      console.log("getItem,");
+      var data = {
+        ...res.data(),
+        goals: goals.data()?.value,
+        mission: mission.data()?.value,
+        vision: vision.data()?.value,
+      };
+      dispatch({ type: types.GET_ABOUT_S, payload: data });
     })
     .then((err) => {
       dispatch({ type: types.GET_ABOUT_F });

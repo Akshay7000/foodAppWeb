@@ -6,6 +6,7 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -14,6 +15,7 @@ import {
   Stack,
   Text,
   useToast,
+  useMediaQuery,
 } from "@chakra-ui/react";
 //import swal from "sweetalert";
 import React, { useState } from "react";
@@ -23,7 +25,9 @@ import { login } from "../redux/AuthReducer/action";
 //import { LOGIN_S } from "../redux/AuthReducer/actionType";
 import Navbar from "../components/Navbar/Navbar";
 import { ViewIcon } from "@chakra-ui/icons";
+import logo from "../img/icon.png";
 const Login = () => {
+  const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,15 +63,33 @@ const Login = () => {
 
   return (
     <>
-      <Navbar /> <br />
-      <Flex minH={"100vh"} align={"center"} justify={"center"}>
+      {/* <Navbar /> <br /> */}
+      <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#13acbc"}>
+        {isLargerThan && (
+          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+            <Box rounded={"lg"} p={8}>
+              <Image
+                width={["34"]}
+                height="100%"
+                m={2}
+                src={logo}
+                alt="logo"
+                fallbackSrc="https://via.placeholder.com/150"
+              />
+            </Box>
+          </Stack>
+        )}
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
-            <Heading fontSize={"4xl"} textTransform={"uppercase"}>
+            <Heading
+              fontSize={"4xl"}
+              textTransform={"uppercase"}
+              color={"#fff"}
+            >
               Sign in to your account
             </Heading>
           </Stack>
-          <Box rounded={"lg"} boxShadow={"lg"} p={8}>
+          <Box rounded={"lg"} boxShadow={"lg"} p={8} bg={"#fff"}>
             <Stack spacing={4}>
               <FormControl id="username" isRequired>
                 <FormLabel>Email</FormLabel>

@@ -10,7 +10,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import portfolio from "../../img/icon.png";
-import { BsGithub, BsLinkedin, BsInstagram, BsFacebook } from "react-icons/bs";
+import {
+  BsGithub,
+  BsLinkedin,
+  BsInstagram,
+  BsFacebook,
+  BsWhatsapp,
+} from "react-icons/bs";
 // import { GiCondorEmblem } from "react-icons/gi";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -32,6 +38,7 @@ const Footer = () => {
           textAlign={isSmallerThan ? "left" : "center"}
           fontSize={["sm", "md", "md", "md"]}
           flexDirection={isSmallerThan ? "row" : "column"}
+          background={"black"}
         >
           <Box
             as={Flex}
@@ -60,17 +67,18 @@ const Footer = () => {
               bg="white"
               src={portfolio}
             />
-            <Heading>Avyaya Health</Heading>
+            <Text w="52" textAlign={"center"}>
+              AVYAYA HEALTH REWINE INDIA LLP
+            </Text>
           </Box>
 
           {isSmallerThan ? (
             <Box>
               <Heading>Support</Heading>
-              <Text>Help</Text>
-              <Text>Customer Service</Text>
-              <Text>Shipping</Text>
               <Text>Order Tracker</Text>
-              <Text>Returns & Exchanges</Text>
+              <Text>Privacy Policy</Text>
+              <Text>Terms & Conditions</Text>
+              <Text>Refund Policy</Text>
             </Box>
           ) : null}
 
@@ -78,9 +86,8 @@ const Footer = () => {
             <Box>
               <Heading>Company Info</Heading>
               <Text>About Us</Text>
-              <Text>Entity Details</Text>
-              <Text>Careers</Text>
-              <Text>Company Apps</Text>
+              <Text>Our Team</Text>
+              <Text>Contact Us</Text>
             </Box>
           ) : null}
           <Box mt="1rem" display={"flex"} gap="1rem" justifyContent={"center"}>
@@ -89,7 +96,7 @@ const Footer = () => {
               target={"_blank"}
               rel="noreferrer"
             >
-              <Icon w={9} h={9} my="1rem" as={BsLinkedin} />
+              <Icon w={9} h={9} my="1rem" as={BsWhatsapp} />
             </a>
             <a
               href="https://avyayahealth.vercel.app/"

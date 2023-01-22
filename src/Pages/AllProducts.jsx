@@ -1,4 +1,11 @@
-import { Box, Flex, Grid, Heading, Spacer, useMediaQuery } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  Heading,
+  Spacer,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -48,18 +55,20 @@ const AllProducts = () => {
         <Loading />
       ) : (
         <>
-          <Box w="95%" m="auto">
+          {/* <Box w="95%" m="auto">
 
             <Trending />
-          </Box>
-          <Flex marginTop={"10%"}>
+          </Box> */}
+          <Flex marginBottom={"10"}>
             <Box w={isLargerThan ? "15%" : "10%"}>
               {/* <FilterData /> */}
               {/* <Fil  terChecked/> */}
             </Box>
             <Spacer />
             <Box width={"100%"}>
-            <Heading align={"left"}> DEALS FOR YOU</Heading>
+              <Heading align={"left"} my={"10"}>
+                DEALS FOR YOU
+              </Heading>
               <Grid
                 templateColumns={
                   isLargerThan ? "repeat(3, 1fr)" : "repeat(2, 1fr)"
@@ -83,6 +92,7 @@ const AllProducts = () => {
               {/* <Fil  terChecked/> */}
             </Box>
           </Flex>
+
           {/* {totalPosts > postPerPage && (
             <Paginate
               currentPage={currentPage}

@@ -1,7 +1,7 @@
 import * as data from "./actionType";
 
 const init = {
-  mensD: [],
+  featured: [],
   womensD: [],
   shoesD: [],
   homeD: [],
@@ -12,17 +12,17 @@ const init = {
 const pagesReducer = (state = init, action) => {
   const { type, payload } = action;
   switch (type) {
-    case data.GET_MENS_DATA_R: {
+    case data.GET_FEATURED_DATA_R: {
       return {
         ...state,
         isLoading: true,
       };
     }
-    case data.GET_MENS_DATA_S: {
+    case data.GET_FEATURED_DATA_S: {
       return {
         ...state,
         isLoading: false,
-        mensD: payload,
+        featured: payload,
       };
     }
     case data.GET_HOMEDATA_S: {
@@ -46,7 +46,7 @@ const pagesReducer = (state = init, action) => {
         shoesD: payload,
       };
     }
-    case data.GET_MENS_DATA_F: {
+    case data.GET_FEATURED_DATA_F: {
       return {
         ...state,
         isError: true,

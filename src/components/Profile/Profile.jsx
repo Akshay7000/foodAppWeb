@@ -67,13 +67,14 @@ const Profile = ({ colorMode }) => {
         >
           <Avatar
             size={"sm"}
+            bg={"black"}
             name={profileData.length !== 0 ? profileData.firstName : ""}
             src={profileData.length !== 0 ? profileData.description : ""}
           />
           <Text
             fontSize={"xs"}
             my={"1"}
-            color={colorMode === "dark" ? "white" : "black"}
+            color={"white"}
             textTransform={"capitalize"}
           >
             {profileData.length !== 0 ? profileData.firstName : ""}

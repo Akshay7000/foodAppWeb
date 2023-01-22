@@ -24,7 +24,7 @@ const Navbar = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const navigate = useNavigate();
   const auth = useSelector((state) => state.AuthReducer.isAuth);
-
+  console.log("auth", auth);
   const cart = useSelector((store) => store.cart.cart);
   // const wishlist = useSelector((store) => store.wishReducer.wishlist);
   const { colorMode } = useColorMode();
@@ -37,7 +37,7 @@ const Navbar = () => {
     color: "#13acbc",
     textDecoration: "none",
     transition: "0.5s",
-    borderBottom: "2px solid #13acbc",
+    borderBottom: "2px solid #fff",
   };
 
   const handleHome = () => {
@@ -54,8 +54,51 @@ const Navbar = () => {
   };
   return (
     <div className="Navbar">
+      {!isLargerThan && (
+        <Flex
+          h={"9vh"}
+          display="flex"
+          justifyContent={"space-between"}
+          // gap="10px"
+          alignItems={"center"}
+          bg={colorMode === "dark" ? "none" : "#13acbc"}
+          px={isLargerThan ? 10 : 5}
+        >
+          <HStack onClick={handleHome} cursor={"pointer"}>
+            <Image
+              width={["70px"]}
+              height="100%"
+              m={2}
+              src={logo}
+              alt="logo"
+              fallbackSrc="https://via.placeholder.com/150"
+            />
+          </HStack>
+          <HStack>
+            {auth ? (
+              <Box>
+                <Profile colorMode={colorMode} />
+              </Box>
+            ) : (
+              <Button
+                bg={"black"}
+                color={"whitesmoke"}
+                border={"1px solid beige"}
+                _hover={{
+                  bg: "none",
+                  color: "teal",
+                }}
+                onClick={handleSignup}
+              >
+                Sign up
+              </Button>
+            )}
+          </HStack>
+        </Flex>
+      )}
       <Flex
-        h={"9vh"}
+        fontWeight="bold"
+        h={"12vh"}
         display="flex"
         justifyContent={"space-between"}
         // gap="10px"
@@ -63,66 +106,50 @@ const Navbar = () => {
         bg={colorMode === "dark" ? "none" : "#13acbc"}
         px={isLargerThan ? 10 : 5}
       >
-        <HStack onClick={handleHome} cursor={"pointer"}>
-          <Image
-            width={["70px"]}
-            height="100%"
-            m={2}
-            src={logo}
-            alt="logo"
-            fallbackSrc="https://via.placeholder.com/150"
-          />
-        </HStack>
-        <HStack>
-          {auth ? (
-            <Box>
-              <Profile colorMode={colorMode} />
-            </Box>
-          ) : (
-            <Button
-              bg={"black"}
-              color={"whitesmoke"}
-              border={"1px solid beige"}
-              _hover={{
-                bg: "none",
-                color: "teal",
-              }}
-              onClick={handleSignup}
-            >
-              Sign up
-            </Button>
-          )}
-          {/* <Box mr={["5", "6", "7", "9"]}>
-            <DarkModeBtn />
-          </Box> */}
-        </HStack>
-      </Flex>
-      <Flex fontWeight="bold">
-        <Spacer />
+        <HStack></HStack>
+        {/* <Spacer /> */}
         {isLargerThan ? (
           <HStack>
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
               to="/"
             >
-              <Text
-                color={colorMode === "dark" ? "white" : "black"}
-                my="4"
-                mx="2"
-              >
-                All Products
+              <Text color={"white"} my="4" mx="2">
+                Home
+              </Text>
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+              to="/products"
+            >
+              <Text color={"white"} my="4" mx="2">
+                Products
+              </Text>
+            </NavLink>
+            <NavLink
+              style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
+              to="/something-new"
+            >
+              <Text color={"white"} my="4" mx="2">
+                Something New
               </Text>
             </NavLink>
 
+            <HStack onClick={handleHome} cursor={"pointer"}>
+              <Image
+                width={["90px"]}
+                height="100%"
+                m={2}
+                src={logo}
+                alt="logo"
+                fallbackSrc="https://via.placeholder.com/150"
+              />
+            </HStack>
             <NavLink
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
               to="/about"
             >
-              <Text
-                color={colorMode === "dark" ? "white" : "black"}
-                my="4"
-                mx="2"
-              >
+              <Text color={"white"} my="4" mx="2">
                 About Us
               </Text>
             </NavLink>
@@ -130,11 +157,7 @@ const Navbar = () => {
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
               to="/team"
             >
-              <Text
-                color={colorMode === "dark" ? "white" : "black"}
-                my="4"
-                mx="2"
-              >
+              <Text color={"white"} my="4" mx="2">
                 Our Team
               </Text>
             </NavLink>
@@ -142,99 +165,82 @@ const Navbar = () => {
               style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
               to="/contact"
             >
-              <Text
-                color={colorMode === "dark" ? "white" : "black"}
-                my="4"
-                mx="2"
-              >
+              <Text color={"white"} my="4" mx="2">
                 Contact Us
-              </Text>
-            </NavLink>
-            <NavLink
-              style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
-              to="/support"
-            >
-              <Text
-                color={colorMode === "dark" ? "white" : "black"}
-                my="4"
-                mx="2"
-              >
-                Support
               </Text>
             </NavLink>
           </HStack>
         ) : null}
 
-        <Spacer />
+        {/* <Spacer /> */}
 
         <HStack>
-          {/* <Box>
-            <Icon
-              w={6}
-              h={6}
-              my="4"
-              mx={isLargerThan ? "3" : "1"}
-              as={BsSearch}
-            />
-          </Box> */}
-          {/*
-          <Box onClick={handleHeart}>
-            <Flex
-              onClick={handleCart}
+          {auth ? (
+            <Box
+              display={"flex"}
               alignItems={"center"}
               alignContent={"center"}
               justifyContent={"center"}
             >
-              <Icon
-                w={6}
-                h={6}
-                my="4"
-                mx="3"
-                as={BsSuitHeart}
-                cursor={"pointer"}
-              />
-              <Text
-                position="relative"
-                top="-15px"
-                left="-25px"
-                borderRadius="50%"
-                p="0rem 0.3rem"
-                bg="blue.500"
-                color="white"
-              >
-                {wishlist ? wishlist.length : 0}
-              </Text>
-            </Flex>
-          </Box> */}
-          <Box>
-            <Flex
-              onClick={handleCart}
-              alignItems={"center"}
-              alignContent={"center"}
-              justifyContent={"center"}
-            >
-              <Icon w={6} h={6} my="4" mx="3" as={BsBag} cursor={"pointer"} />
-              <Text
-                position="relative"
-                top="-15px"
-                left="-25px"
-                borderRadius="50%"
-                p="0rem 0.3rem"
-                bg="blue.500"
-                color="white"
-                textAlign={"center"}
-                justifyContent={"center"}
+              {isLargerThan && (
+                <Box>
+                  <Profile colorMode={colorMode} />
+                </Box>
+              )}
+              <Flex
+                onClick={handleCart}
                 alignItems={"center"}
-                display={"flex"}
-                fontSize={12}
-                w={6}
-                h={6}
+                alignContent={"center"}
+                justifyContent={"center"}
               >
-                {cart ? cart.length : 0}
-              </Text>
-            </Flex>
-          </Box>
-          <Box> {!isLargerThan && <SideMenu colorMode={colorMode} />}</Box>
+                <Icon
+                  w={6}
+                  h={6}
+                  my="4"
+                  mx="3"
+                  as={BsBag}
+                  color={"#fff"}
+                  cursor={"pointer"}
+                />
+                <Text
+                  position="relative"
+                  top="-15px"
+                  left="-25px"
+                  borderRadius="50%"
+                  p="0rem 0.3rem"
+                  bg="#000"
+                  color="#fff"
+                  textAlign={"center"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  display={"flex"}
+                  fontSize={12}
+                  w={6}
+                  h={6}
+                >
+                  {cart ? cart.length : 0}
+                </Text>
+              </Flex>
+            </Box>
+          ) : (
+            <HStack>
+              {isLargerThan && (
+                <Button
+                  bg={"black"}
+                  color={"whitesmoke"}
+                  border={"1px solid beige"}
+                  _hover={{
+                    bg: "none",
+                    color: "teal",
+                  }}
+                  onClick={handleSignup}
+                >
+                  Sign up
+                </Button>
+              )}
+            </HStack>
+          )}
+          <Box> {!isLargerThan && <SideMenu colorMode={"dark"} />}</Box>
         </HStack>
       </Flex>
     </div>

@@ -1,38 +1,35 @@
-import React, { useEffect, useReducer,useState } from "react";
+import { ViewIcon } from "@chakra-ui/icons";
 import {
-  Flex,
   Box,
+  Button,
+  Flex,
   FormControl,
   FormLabel,
+  Heading,
+  HStack,
+  Image,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
+  Spinner,
   Stack,
-  Button,
-  Heading,
   Text,
   useColorModeValue,
-  Editable,
-  EditablePreview,
-  EditableTextarea,
-  Spinner,
+  useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import React, { useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/AuthReducer/action";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
-  checkCharacter,
   checkEmail,
   checkMobile,
   checkPassword,
   checkSignupForm,
   setToast,
 } from "../components/Other/CheckProperty";
-import { users } from "../Firebase/Collection";
-
+import { register } from "../redux/AuthReducer/action";
+import logo from "../img/icon.png";
 const initialState = {
   name: "",
   email: "",
@@ -62,6 +59,7 @@ const reducer = (state, action) => {
 };
 
 const Signup = () => {
+  const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const [state, setState] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,6 +71,7 @@ const Signup = () => {
   };
   const signupHandle = () => {
     const isEmpty = checkSignupForm(state);
+
     if (!isEmpty.status) {
       return setToast(toast, isEmpty.message, "error");
     }
@@ -100,24 +99,38 @@ const Signup = () => {
       return isMobile.status;
     }
     dispatch(register(state, toast)).then((r) => {
-      if(r?.email)navigate("/login", { replace: true });
+      if (r?.email) navigate("/login", { replace: true });
     });
   };
 
-
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
+    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"#13acbc"}>
+      {isLargerThan && (
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Box
+            rounded={"lg"}
+            // bg={useColorModeValue("white", "gray.700")}
+            // boxShadow={"lg"}
+            p={8}
+          >
+            <Image
+              width={["34"]}
+              height="100%"
+              m={2}
+              src={logo}
+              alt="logo"
+              fallbackSrc="https://via.placeholder.com/150"
+            />
+          </Box>
+        </Stack>
+      )}
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading
             textTransform={"uppercase"}
             fontSize={"4xl"}
             textAlign={"center"}
+            color={"#fff"}
           >
             Sign up
           </Heading>

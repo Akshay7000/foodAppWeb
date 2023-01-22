@@ -12,6 +12,7 @@ import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
 import call from "../img/call.png";
 import email from "../img/email.png";
+import address from "../img/address.png";
 import { getAboutData } from "../redux/WebInfoReducer/action";
 function ContectUs(props) {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function ContectUs(props) {
 
   return (
     <div className="AllwomensD">
-      <Navbar /> <br />
+      <Navbar />
       <Flex display={"flex"} justifyContent="center" alignItems={"center"}>
         {loading ? (
           <Loading />
@@ -49,8 +50,8 @@ function ContectUs(props) {
             >
               <Box
                 display={"flex"}
-                width={isLargerThan ? "40%" : "80%"}
-                // height={"200px"}
+                width={isLargerThan ? "30%" : "80%"}
+                height={"100%"}
                 flexDirection={"column"}
                 justifyContent={"center"}
                 alignItems={"center"}
@@ -89,19 +90,19 @@ function ContectUs(props) {
                   my={"5"}
                   color={!colorMode === "dark" ? "white" : "black"}
                 >
-                  <a href="tel:8665562570">+91 8665562570</a>
+                  <a href="tel:9479394010">+91 9479394010</a>
                 </Text>
               </Box>
               <Box
                 border={"1px solid #b2b4b8"}
                 borderRadius={"15px"}
                 display={"flex"}
-                width={isLargerThan ? "40%" : "80%"}
-                // height={"150px"}
+                width={isLargerThan ? "30%" : "80%"}
+                height={"100%"}
                 flexDirection={"column"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                py={"12 "}
+                py={"14"}
                 backgroundColor={"#fff"}
                 my={"5"}
               >
@@ -133,7 +134,56 @@ function ContectUs(props) {
                   my={"5"}
                   color={!colorMode === "dark" ? "white" : "black"}
                 >
-                  <a href="mailto: testuser@email.com">testuser@email.com</a>
+                  <a href="mailto: AVYAYAHEALTH@GMAIL.COM">
+                    avyayahealth@email.com
+                  </a>
+                </Text>
+              </Box>
+              <Box
+                border={"1px solid #b2b4b8"}
+                borderRadius={"15px"}
+                display={"flex"}
+                width={isLargerThan ? "30%" : "80%"}
+                height={"100%"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                py={"12 "}
+                backgroundColor={"#fff"}
+                my={"5"}
+              >
+                <Box width={"15%"} height={"15%"}>
+                  <Image
+                    src={address}
+                    width={"100%"}
+                    height={"100%"}
+                    alt={"call"}
+                  />
+                </Box>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
+                  Registered Address
+                </Text>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
+                  Sometimes you need a little help from your friends. Don't
+                  worry.. we're here for you Contact Support
+                </Text>
+                <Text
+                  width={"80%"}
+                  my={"5"}
+                  color={!colorMode === "dark" ? "white" : "black"}
+                >
+                  <a>
+                    67 SANWARIYA KUNJ COLONY RAU RANGWASA MHOW INDORE (M.P.)
+                    453331
+                  </a>
                 </Text>
               </Box>
             </Box>
