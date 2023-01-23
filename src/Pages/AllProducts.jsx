@@ -59,7 +59,7 @@ const AllProducts = () => {
 
             <Trending />
           </Box> */}
-          <Flex marginBottom={"10"}>
+          <Flex my={"10"}>
             <Box w={isLargerThan ? "15%" : "10%"}>
               {/* <FilterData /> */}
               {/* <Fil  terChecked/> */}
@@ -82,7 +82,13 @@ const AllProducts = () => {
               >
                 {products?.length > 0 &&
                   products?.map((item) => {
-                    return <ProductDis key={item.key} item={item} />;
+                    return (
+                      <ProductDis
+                        key={item.key}
+                        item={item}
+                        type={"products"}
+                      />
+                    );
                   })}
               </Grid>
             </Box>

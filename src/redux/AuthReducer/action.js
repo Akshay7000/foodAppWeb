@@ -1,8 +1,8 @@
 import axios from "axios";
 import { setToast } from "../../components/Other/CheckProperty";
-import { users } from "../../Firebase/Collection";
+import { customers } from "../../Firebase/Collection";
 import { auth } from "../../Firebase/config";
-import { saveLocalData } from "../../utils/localStorage";
+import { getLocalData, saveLocalData } from "../../utils/localStorage";
 import * as types from "./actionType";
 
 const register = (payload, toast) => (dispatch) => {
@@ -21,8 +21,10 @@ const register = (payload, toast) => (dispatch) => {
         mobile: payload.mobile,
         uid: user.uid,
         userType: "user",
+        isSubscribed: false,
+        subscribedID: "",
       };
-      await users.doc(user.uid).set(userObject);
+      await customers.doc(user.uid).set(userObject);
       dispatch({ type: types.REGISTER_S, payload: user });
       return user;
     })
@@ -38,7 +40,7 @@ const login = (payload, toast) => (dispatch) => {
   saveLocalData("userInfo", payload.email);
   dispatch({ type: types.LOGIN_R });
 
-  return users
+  return customers
     .where("email", "==", "anagaich@moreyeahs.in")
     .get()
     .then((res) => {
@@ -73,7 +75,7 @@ const login = (payload, toast) => (dispatch) => {
 
 const profile = (payload) => async (dispatch) => {
   dispatch({ type: types.PROFILE_R });
-  return await users
+  return await customers
     .doc(payload.token.uid)
     .get()
     .then((r) => {
@@ -84,47 +86,19 @@ const profile = (payload) => async (dispatch) => {
     })
     .catch((e) => dispatch({ type: types.PROFILE_F, payload: e }));
 };
+const profileUpdate = (payload) => async (dispatch) => {
+  const token = getLocalData("token");
+  dispatch({ type: types.UPDATE_PROFILE_R });
+  return await customers
+    .doc(token?.uid)
+    .update(payload)
+    .then((r) => {
+      dispatch({
+        type: types.UPDATE_PROFILE_S,
+        payload: r.data(),
+      });
+    })
+    .catch((e) => dispatch({ type: types.UPDATE_PROFILE_F, payload: e }));
+};
 
-export { login, register, profile };
-
-// const login = (payload,toast) => (dispatch) => {
-//   //console.log(payload)
-//   dispatch({ type: types.LOGIN_R });
-
-//   return axios({
-//     method: "post",
-//     url: "/api/login",
-//     baseURL: "https://reqres.in",
-//     data: payload,
-//   })
-//     .then((res) => {
-//       setToast(toast, "Login Successful", "success");
-//       return dispatch({
-//         type: types.LOGIN_S,
-//         payload: res.data.token,
-//       });
-//     })
-//     .catch((err) => {
-//       setToast(toast, err.response.data.message, "error");
-//       dispatch({ type: types.LOGIN_F });
-//     });
-// };
-// export {login,register,profile}
-//================================================
-
-// const profile = (payload) => (dispatch) => {
-//   const config = {
-//     headers: { Authorization: `Bearer ${payload.token}` },
-//   };
-//   dispatch({ type: types.PROFILE_R });
-//   axios
-//     .get(
-//       `https://masai-api-mocker.herokuapp.com/user/${payload.username}`,
-//       config
-//     )
-//     .then((r) => {
-//       console.log(r);
-//       dispatch({ type: types.PROFILE_S, paylaod: r.data });
-//     })
-//     .catch((e) => dispatch({ type: types.PROFILE_F, payload: e }));
-// };
+export { login, register, profile, profileUpdate };

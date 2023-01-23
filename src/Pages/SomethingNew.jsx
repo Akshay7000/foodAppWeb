@@ -35,7 +35,7 @@ const SomethingNew = () => {
         <Loading />
       ) : (
         <>
-          <Flex marginBottom={"10"}>
+          <Flex my={"10"}>
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
             <Spacer />
             <Box width={"100%"}>
@@ -50,7 +50,13 @@ const SomethingNew = () => {
               >
                 {featured?.length > 0 &&
                   featured?.map((item) => {
-                    return <ProductDis key={item.key} item={item} />;
+                    return (
+                      <ProductDis
+                        key={item.key}
+                        item={item}
+                        type={"featured"}
+                      />
+                    );
                   })}
               </Grid>
             </Box>

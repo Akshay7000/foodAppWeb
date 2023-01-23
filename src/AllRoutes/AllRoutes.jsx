@@ -16,6 +16,7 @@ import Support from "../Pages/Support";
 import Authentication from "../PrivateRoute/Authentication";
 import SomethingNew from "../Pages/SomethingNew";
 import Home from "../Pages/Home";
+import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
 const AllRoutes = () => {
   return (
@@ -28,7 +29,7 @@ const AllRoutes = () => {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/team" element={<OurTeam />} />
         <Route path="/contact" element={<ContectUs />} />
-        <Route path="/description/:id" element={<DescriptionPage />} />
+        <Route path="/description/:type/:id" element={<DescriptionPage />} />
         <Route path="/support" element={<Support />} />
         {/* <Route
           path="/wishlist"

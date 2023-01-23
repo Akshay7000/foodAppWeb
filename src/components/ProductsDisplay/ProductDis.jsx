@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { AiOutlineStar } from "react-icons/ai";
 import { StarIcon } from "@chakra-ui/icons";
 
-const ProductDis = ({ item }) => {
+const ProductDis = ({ item, type }) => {
   const navigate = useNavigate();
   const {
     id,
@@ -25,7 +25,7 @@ const ProductDis = ({ item }) => {
   } = item;
   const [img, setImg] = useState(image);
   const handleDes = () => {
-    navigate(`/description/${id}`);
+    navigate(`/description/${type}/${id}`);
   };
   const ChangeHoverImage = () => {
     setImg(images[1]);

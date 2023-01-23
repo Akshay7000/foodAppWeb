@@ -1,30 +1,32 @@
 import {
   Box,
-  Image,
   Flex,
-  useMediaQuery,
-  Stack,
-  Text,
   Heading,
+  Image,
+  Text,
+  useMediaQuery,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Carousel from "../components/Carousel/Carousel";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
-import Trending from "../components/Trends/Trending";
-import { imagesData } from "../utils/data";
 import Navbar from "../components/Navbar/Navbar";
-import milkSplash from "../img/milksplash.png";
-import milkSplash1 from "../img/milksplash1.png";
+import SubscribeModal from "../components/SubscribeModal/SubscribeModal";
 import cow from "../img/cow.png";
-import NA from "../img/nA.png";
 import FD from "../img/fd1.png";
 import Hyg from "../img/hyg.png";
 import milkBottels from "../img/milkBottels.jpg";
+import milkSplash from "../img/milksplash.png";
+import milkSplash1 from "../img/milksplash1.png";
+import NA from "../img/nA.png";
+import { getSubscribepProducts } from "../redux/PagesReducer/action";
 const Home = () => {
   const loading = useSelector((store) => store.pagesReducer.isLoading);
+  const dispatch = useDispatch();
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
-  // const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getSubscribepProducts());
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -61,7 +63,8 @@ const Home = () => {
           >
             <Flex
               flexDirection={isLargerThan ? "row" : "column"}
-              h={"100vh"}
+              // h={"100vh"}
+              py={"14"}
               alignItems={"center"}
               mx={"5"}
             >
@@ -70,7 +73,7 @@ const Home = () => {
               </Box>
               <Box
                 width={isLargerThan ? "70%" : "100%"}
-                height={"70%"}
+                // height={"70%"}
                 display={"flex"}
                 justifyContent={"center"}
               >
@@ -104,9 +107,6 @@ const Home = () => {
                     fresh,rich in nutritiants, and as pure as nature intended.
                   </Text>
                   <Flex
-                    // bg={"red"}
-
-                    // flexDirection={isLargerThan ? "row" : "column"}
                     justifyContent={"space-around"}
                     alignItems={"center"}
                     m={"auto"}
@@ -130,6 +130,7 @@ const Home = () => {
                       <Text>HYGIENIC PROCESS</Text>
                     </Box>
                   </Flex>
+                  <SubscribeModal />
                 </Box>
               </Box>
             </Flex>

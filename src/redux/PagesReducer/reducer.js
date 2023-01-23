@@ -4,7 +4,7 @@ const init = {
   featured: [],
   womensD: [],
   shoesD: [],
-  homeD: [],
+  subscribeProducts: [],
   isLoading: false,
   isError: false,
 };
@@ -25,31 +25,32 @@ const pagesReducer = (state = init, action) => {
         featured: payload,
       };
     }
-    case data.GET_HOMEDATA_S: {
-      return {
-        ...state,
-        isLoading: false,
-        homeD: payload,
-      };
-    }
-    case data.GET_WOMENS_DATA_S: {
-      return {
-        ...state,
-        isLoading: false,
-        womensD: payload,
-      };
-    }
-    case data.GET_SHOES_DATA_S: {
-      return {
-        ...state,
-        isLoading: false,
-        shoesD: payload,
-      };
-    }
+
     case data.GET_FEATURED_DATA_F: {
       return {
         ...state,
         isError: true,
+      };
+    }
+    case data.GET_SUBSCRIBED_F: {
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+    }
+    case data.GET_SUBSCRIBED_S: {
+      return {
+        ...state,
+        subscribeProducts: payload,
+        isError: false,
+        isLoading: false,
+      };
+    }
+    case data.GET_SUBSCRIBED_R: {
+      return {
+        ...state,
+        isLoading: true,
       };
     }
     default: {

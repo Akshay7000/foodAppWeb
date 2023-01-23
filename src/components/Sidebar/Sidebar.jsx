@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 
 export default function SideMenu({ colorMode }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [placement, setPlacement] = useState("right");
+  const [placement, setPlacement] = useState("left");
 
   return (
     <>

@@ -31,7 +31,7 @@ function ContectUs(props) {
         {loading ? (
           <Loading />
         ) : (
-          <Box>
+          <Box mt={"70"}>
             <Box width={"100%"}>
               <Image
                 width={"100%"}

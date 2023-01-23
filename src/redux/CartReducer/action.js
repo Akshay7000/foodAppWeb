@@ -1,11 +1,11 @@
-import { users } from "../../Firebase/Collection";
+import { customers } from "../../Firebase/Collection";
 import { getLocalData } from "../../utils/localStorage";
 import * as types from "./actionType";
 
 const getCart = (params) => (dispatch) => {
   dispatch({ type: types.GET_CART_R });
 
-  return users
+  return customers
     .doc(params)
     .collection("cart")
     .get()
@@ -26,7 +26,7 @@ const incQty = (params) => (dispatch) => {
   dispatch({ type: types.GET_CART_R });
   console.log("params", params);
   var qty = params.qty === NaN ? 0 : params.qty;
-  return users
+  return customers
     .doc(params.uid)
     .collection("cart")
     .doc(params.id)
@@ -39,7 +39,7 @@ const decQty = (params) => (dispatch) => {
   dispatch({ type: types.GET_CART_R });
   console.log("params", params);
   var qty = params.qty === NaN ? 0 : params.qty;
-  return users
+  return customers
     .doc(params.uid)
     .collection("cart")
     .doc(params.id)
@@ -57,7 +57,7 @@ const removeItem = (params) => (dispatch) => {
   dispatch({ type: types.GET_CART_R });
   console.log("params", params);
 
-  return users
+  return customers
     .doc(params.uid)
     .collection("cart")
     .doc(params.id)
@@ -84,7 +84,7 @@ const addToCart = (payload) => async (dispatch) => {
   // });
 
   // return [itemRecived];
-  users
+  customers
     .doc(payload.uid)
     .collection("cart")
     .doc(payload.currentProducts.id)
@@ -92,7 +92,7 @@ const addToCart = (payload) => async (dispatch) => {
     .then((res) => {
       if (res.data()) {
         console.log("resp", res.data());
-        users
+        customers
           .doc(payload.uid)
           .collection("cart")
           .doc(payload.currentProducts.id)
@@ -102,7 +102,7 @@ const addToCart = (payload) => async (dispatch) => {
         //   payload: payload.currentProducts,
         // });
       } else {
-        users
+        customers
           .doc(payload.uid)
           .collection("cart")
           .doc(payload.currentProducts.id)

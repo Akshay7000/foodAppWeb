@@ -31,7 +31,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  // const [username, setUsername] = useState("");
+  const [isChecked, setisChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
@@ -120,11 +120,14 @@ const Login = () => {
                   align={"start"}
                   justify={"space-between"}
                 >
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox onChange={(e) => setisChecked(e.target.checked)}>
+                    Accept Terms & Conditions
+                  </Checkbox>
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button
                   bg={"black"}
+                  disabled={!isChecked}
                   color={"whitesmoke"}
                   _hover={{
                     bg: "none",

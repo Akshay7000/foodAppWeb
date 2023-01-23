@@ -24,6 +24,7 @@ function OurTeam() {
         justifyContent="center"
         width={"100%"}
         alignItems={"center"}
+        mt={"90"}
       >
         {loading ? (
           <Loading />

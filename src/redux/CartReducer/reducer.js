@@ -1,4 +1,4 @@
-import { users } from "../../Firebase/Collection";
+import { customers } from "../../Firebase/Collection";
 import * as data from "./actionType";
 
 const init = {

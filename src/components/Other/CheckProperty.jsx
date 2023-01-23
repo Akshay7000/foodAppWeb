@@ -25,6 +25,31 @@ export const checkFormEmpty = (form) => {
   }
   return { status: true };
 };
+export const checkSubscribeFormEmpty = (form) => {
+  const {
+    firstName,
+    lastName,
+    addressLine1,
+    locality,
+    pinCode,
+    state,
+    subscribedID,
+    mobile,
+  } = form;
+  if (
+    !firstName ||
+    !lastName ||
+    !addressLine1 ||
+    !locality ||
+    !pinCode ||
+    !state ||
+    !mobile ||
+    !subscribedID
+  ) {
+    return { status: false, message: "Please fill the mandatory details" };
+  }
+  return { status: true };
+};
 export const checkMobile = (num) => {
   if (num.length !== 10) {
     return {

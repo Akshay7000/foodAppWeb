@@ -15,13 +15,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { addToCart } from "../../redux/CartReducer/action";
 import { getData } from "../../redux/DataReducer/action";
 import { addToWishList } from "../../redux/WishReducer/action";
+import Loading from "../Loading/Loading";
 import Navbar from "../Navbar/Navbar";
 import { setToast } from "../Other/CheckProperty";
 // import { BsBagFill } from "react-icons/bs";
 const DescriptionPage = () => {
-  const { id } = useParams();
+  const { id, type } = useParams();
   const toast = useToast();
   const products = useSelector((store) => store.dataReducer.products);
+  const isloading = useSelector((store) => store.dataReducer.isLoading);
+  const featured = useSelector((store) => store.pagesReducer.featured);
   const cart = useSelector((store) => store.cart.cart);
   const profile = useSelector((state) => state.AuthReducer?.profileData);
   const navigate = useNavigate();
@@ -36,10 +39,19 @@ const DescriptionPage = () => {
     }
   }, [dispatch, products.length]);
   useEffect(() => {
-    if (id) {
-      const cur = products.find((item) => item.id === id);
-      console.log("products", cur);
-      cur && setCurrentProducts(cur);
+    if (type === "products") {
+      if (id) {
+        const cur = products.find((item) => item.id === id);
+        console.log("products", cur);
+        cur && setCurrentProducts(cur);
+      }
+    }
+    if (type === "featured") {
+      if (id) {
+        const cur = featured.find((item) => item.id === id);
+        console.log("products", cur);
+        cur && setCurrentProducts(cur);
+      }
     }
   }, [id, products]);
 
@@ -68,29 +80,33 @@ const DescriptionPage = () => {
   return (
     <div key={currentProducts.id}>
       <Navbar /> <br />
-      <Flex
-        justify={"space-between"}
-        flexDirection={isLargerThan ? "row" : "column"}
-      >
-        <Box
-          width={["100%", "100%", "60%", "60%"]}
-          min-height={"100vh"}
-          fallbackSrc="https://via.placeholder.com/150"
+      {isloading ? (
+        <Loading />
+      ) : (
+        <Flex
+          justify={"space-between"}
+          flexDirection={isLargerThan ? "row" : "column"}
+          my={"90"}
         >
-          {/* ------------------------------ 1 image------------------------------------ */}
-          <Box>
-            <Image
-              w={"100%"}
-              h={"580"}
-              objectFit={"contain"}
-              src={currentProducts?.image}
-              fallbackSrc="https://via.placeholder.com/150"
-            />
-          </Box>
+          <Box
+            width={["100%", "100%", "60%", "60%"]}
+            min-height={"100vh"}
+            fallbackSrc="https://via.placeholder.com/150"
+          >
+            {/* ------------------------------ 1 image------------------------------------ */}
+            <Box>
+              <Image
+                w={"100%"}
+                h={"580"}
+                objectFit={"contain"}
+                src={currentProducts?.image}
+                fallbackSrc="https://via.placeholder.com/150"
+              />
+            </Box>
 
-          {/* ------------------------------ 4 images------------------------------------ */}
+            {/* ------------------------------ 4 images------------------------------------ */}
 
-          {/* <Box>
+            {/* <Box>
             <Flex>
               <Box>
                 <Image src={currentProducts.images?.[1]} />
@@ -109,44 +125,44 @@ const DescriptionPage = () => {
             </Flex>
           </Box> */}
 
-          {/* --------------------------------------------------------------------- */}
-        </Box>
+            {/* --------------------------------------------------------------------- */}
+          </Box>
 
-        {/* ------------------------------details Box------------------------------------ */}
-        <Box
-          width={["100%", "100%", "35%", "35%"]}
-          min-height={"100vh"}
-          textAlign={"left"}
-          my={"6"}
-          px={"6"}
-          border={"none"}
-        >
-          <Box border={"none"}>
-            <Heading>{currentProducts.productName}</Heading>
-            <Box my={"6"} fontSize={["sm", "md", "lg", "xl"]} border={"none"}>
-              <Text fontSize={"lg"}>
-                MRP :
-                {/* <span style={{ textDecoration: "line-through" }}>
+          {/* ------------------------------details Box------------------------------------ */}
+          <Box
+            width={["100%", "100%", "35%", "35%"]}
+            min-height={"100vh"}
+            textAlign={"left"}
+            my={"6"}
+            px={"6"}
+            border={"none"}
+          >
+            <Box border={"none"}>
+              <Heading>{currentProducts.productName}</Heading>
+              <Box my={"6"} fontSize={["sm", "md", "lg", "xl"]} border={"none"}>
+                <Text fontSize={"lg"}>
+                  MRP :
+                  {/* <span style={{ textDecoration: "line-through" }}>
                   ₹{currentProducts.price}.00
                 </span> */}
-                <span
-                  style={{
-                    color: "red",
-                    fontWeight: "bold",
-                    marginLeft: "5px",
-                  }}
-                >
-                  ₹{currentProducts.price}.00
-                </span>
-              </Text>
-              <Text fontSize={"lg"}>
-                weight :<span>{currentProducts.weight + " " + "kg"}</span>
-              </Text>
-              <Badge color={"grey"} fontWeight={"bold"}>
-                incl. of taxes and duties
-              </Badge>
-            </Box>
-            {/* <Box>
+                  <span
+                    style={{
+                      color: "red",
+                      fontWeight: "bold",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    ₹{currentProducts.price}.00
+                  </span>
+                </Text>
+                <Text fontSize={"lg"}>
+                  weight :<span>{currentProducts.weight + " " + "kg"}</span>
+                </Text>
+                <Badge color={"grey"} fontWeight={"bold"}>
+                  incl. of taxes and duties
+                </Badge>
+              </Box>
+              {/* <Box>
               <Text
                 fontSize={["sm", "md", "lg", "xl"]}
                 textAlign="left"
@@ -171,19 +187,19 @@ const DescriptionPage = () => {
                 ))}
               </Flex>
             </Box> */}
-            <Box mt="3rem" align={"left"}>
-              <Button
-                width={["100%", "100%", "70%", "70%"]}
-                bg="black"
-                color={"whitesmoke"}
-                colorScheme={"blackAlpha"}
-                disabled={isInCart()}
-                onClick={handleCart}
-              >
-                {isInCart() ? "ADDED TO BEG" : "ADD TO BAG"}
-              </Button>
-            </Box>
-            {/* <Box mt="1rem" align={"left"}>
+              <Box mt="3rem" align={"left"}>
+                <Button
+                  width={["100%", "100%", "70%", "70%"]}
+                  bg="black"
+                  color={"whitesmoke"}
+                  colorScheme={"blackAlpha"}
+                  disabled={isInCart()}
+                  onClick={handleCart}
+                >
+                  {isInCart() ? "ADDED TO BEG" : "ADD TO BAG"}
+                </Button>
+              </Box>
+              {/* <Box mt="1rem" align={"left"}>
               <Button
                 width={["100%", "100%", "70%", "70%"]}
                 bg="white"
@@ -194,22 +210,23 @@ const DescriptionPage = () => {
                 ADD TO FAVOURITE <AiFillHeart color="red" size={"20px"} />
               </Button>
             </Box> */}
-          </Box>
-          <hr />
-          {/* ------------------------------details Box End------------------------------------ */}
+            </Box>
+            <hr />
+            {/* ------------------------------details Box End------------------------------------ */}
 
-          {/* ------------------------------description Box------------------------------------ */}
-          <Box mt={"5rem"} align={"left"} textTransform={"capitalize"}>
-            <Badge fontSize="1rem" colorScheme="blackAlpha">
-              Description :
-            </Badge>
+            {/* ------------------------------description Box------------------------------------ */}
+            <Box mt={"5rem"} align={"left"} textTransform={"capitalize"}>
+              <Badge fontSize="1rem" colorScheme="blackAlpha">
+                Description :
+              </Badge>
 
-            <Text fontSize={"lg"}>
-              <span>{currentProducts.description}</span>
-            </Text>
+              <Text fontSize={"lg"}>
+                <span>{currentProducts.description}</span>
+              </Text>
+            </Box>
           </Box>
-        </Box>
-      </Flex>
+        </Flex>
+      )}
     </div>
   );
 };

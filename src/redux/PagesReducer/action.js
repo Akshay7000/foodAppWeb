@@ -1,6 +1,6 @@
 import * as types from "./actionType";
 import axios from "axios";
-import { Featured } from "../../Firebase/Collection";
+import { Featured, subscribeProducts } from "../../Firebase/Collection";
 
 const getMensData = (params) => (dispatch) => {
   dispatch({ type: types.GET_FEATURED_DATA_R });
@@ -42,35 +42,27 @@ const getWomensData = (params) => (dispatch) => {
       dispatch({ type: types.GET_FEATURED_DATA_F });
     });
 };
-const getShoesData = (params) => (dispatch) => {
-  dispatch({ type: types.GET_FEATURED_DATA_R });
-  return axios
-    .get(`${process.env.REACT_APP_BASE_API}/allproducts?category=shoes`, params)
-    .then((res) => {
-      dispatch({ type: types.GET_SHOES_DATA_S, payload: res.data });
-    })
-    .then((err) => {
-      dispatch({ type: types.GET_FEATURED_DATA_F });
-    });
-};
 
-const getHomeData = () => (dispatch) => {
-  dispatch({ type: types.GET_FEATURED_DATA_R });
+const getSubscribepProducts = () => (dispatch) => {
+  dispatch({ type: types.GET_SUBSCRIBED_R });
 
-  return axios
-    .get(`${process.env.REACT_APP_BASE_API}/Homepage`)
+  return subscribeProducts
+    .get()
     .then((res) => {
-      dispatch({ type: types.GET_HOMEDATA_S, payload: res.data });
+      dispatch({
+        type: types.GET_SUBSCRIBED_S,
+        payload: res.docs.map((i) => i.data()),
+      });
     })
-    .then((err) => {
-      dispatch({ type: types.GET_FEATURED_DATA_F });
+    .catch((err) => {
+      console.log(":err ", err);
+      dispatch({ type: types.GET_SUBSCRIBED_F, payload: [] });
     });
 };
 
 export {
   getWomensData,
   getMensData,
-  getShoesData,
-  getHomeData,
+  getSubscribepProducts,
   getFeaturedProducts,
 };

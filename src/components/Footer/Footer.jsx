@@ -18,7 +18,7 @@ import {
   BsWhatsapp,
 } from "react-icons/bs";
 // import { GiCondorEmblem } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Footer = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const [isSmallerThan] = useMediaQuery("(min-width: 468px)");
@@ -83,12 +83,12 @@ const Footer = () => {
           ) : null}
 
           {isLargerThan ? (
-            <Box>
+            <Flex flexDirection={"column"}>
               <Heading>Company Info</Heading>
-              <Text>About Us</Text>
-              <Text>Our Team</Text>
-              <Text>Contact Us</Text>
-            </Box>
+              <NavLink to={"/about"}>About Us</NavLink>
+              <NavLink to={"/team"}>Our Team</NavLink>
+              <NavLink to={"/contact"}>Contact Us</NavLink>
+            </Flex>
           ) : null}
           <Box mt="1rem" display={"flex"} gap="1rem" justifyContent={"center"}>
             <a

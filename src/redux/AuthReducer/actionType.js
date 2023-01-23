@@ -9,3 +9,7 @@ export const REGISTER_F = "REGISTER_F";
 export const PROFILE_R = "PROFILE_R";
 export const PROFILE_S = "PROFILE_S";
 export const PROFILE_F = "PROFILE_F";
+
+export const UPDATE_PROFILE_R = "UPDATE_PROFILE_R";
+export const UPDATE_PROFILE_S = "UPDATE_PROFILE_S";
+export const UPDATE_PROFILE_F = "UPDATE_PROFILE_F";

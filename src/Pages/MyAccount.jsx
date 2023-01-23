@@ -11,19 +11,17 @@ const MyAccount = () => {
     <div>
       <Navbar />
       <Box
-        h={isLargerThan && "100vh"}
+        h={isLargerThan && "110vh"}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
-        marginTop={!isLargerThan && 20}
       >
-        {/* <Navbar /> <br /> */}
-
         <Box
           h={isLargerThan && "80%"}
           w={"80%"}
           display={"flex"}
           boxShadow="2xl"
+          marginTop={20}
           flexDirection={isLargerThan ? "row" : "column"}
         >
           <Box
@@ -73,8 +71,13 @@ const MyAccount = () => {
             </Box>
             <Box my={2}>
               <Text color={"GrayText"}>Address</Text>
-              <Text fontSize={isLargerThan ? 34 : 22} fontWeight={"bold"}>
-                2349 Barfani Dham M.R.9, Indore M.P 452010
+              <Text
+                fontSize={isLargerThan ? 34 : 22}
+                fontWeight={"bold"}
+                noOfLines={5}
+              >
+                {profileData?.address &&
+                  Object.values(profileData?.address).toString()}
               </Text>
             </Box>
           </Box>

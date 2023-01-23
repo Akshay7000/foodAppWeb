@@ -28,7 +28,7 @@ function AboutUs() {
         {loading ? (
           <Loading />
         ) : (
-          <Box mx={5}>
+          <Box mx={5} mt={"90"}>
             <Flex flexDirection={isLargerThan ? "row" : "column"}>
               <Box width={"100%"} height={"70%"}>
                 <Image width={"100%"} src={cowgrass} borderRadius={"2xl"} />
