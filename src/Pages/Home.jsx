@@ -17,6 +17,8 @@ import Hyg from "../img/hyg.png";
 import milkBottels from "../img/milkBottels.jpg";
 import milkSplash from "../img/milksplash.png";
 import milkSplash1 from "../img/milksplash1.png";
+import bg from "../img/bg.png";
+
 import NA from "../img/nA.png";
 import { getSubscribepProducts } from "../redux/PagesReducer/action";
 const Home = () => {

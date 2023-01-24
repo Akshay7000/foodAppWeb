@@ -73,13 +73,13 @@ const Footer = () => {
           </Box>
 
           {isSmallerThan ? (
-            <Box>
+            <Flex flexDirection={"column"}>
               <Heading>Support</Heading>
               <Text>Order Tracker</Text>
-              <Text>Privacy Policy</Text>
-              <Text>Terms & Conditions</Text>
-              <Text>Refund Policy</Text>
-            </Box>
+              <NavLink to={"/privacy"}>Privacy Policy</NavLink>
+              <NavLink to={"/terms"}>Terms & Conditions</NavLink>
+              <NavLink to={"/return"}>Refund Policy</NavLink>
+            </Flex>
           ) : null}
 
           {isLargerThan ? (
@@ -92,21 +92,21 @@ const Footer = () => {
           ) : null}
           <Box mt="1rem" display={"flex"} gap="1rem" justifyContent={"center"}>
             <a
-              href="https://avyayahealth.vercel.app/"
+              href="https://wa.me/919479394010"
               target={"_blank"}
               rel="noreferrer"
             >
               <Icon w={9} h={9} my="1rem" as={BsWhatsapp} />
             </a>
             <a
-              href="https://avyayahealth.vercel.app/"
+              href="https://www.facebook.com/AVYAYAHEALTH?mibextid=ZbWKwL"
               target={"_blank"}
               rel="noreferrer"
             >
               <Icon w={9} h={9} my="1rem" as={BsFacebook} />
             </a>
             <a
-              href="https://avyayahealth.vercel.app/"
+              href="https://www.instagram.com/avyaya_health/"
               target={"_blank"}
               rel="noreferrer"
             >

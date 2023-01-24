@@ -17,6 +17,9 @@ import Authentication from "../PrivateRoute/Authentication";
 import SomethingNew from "../Pages/SomethingNew";
 import Home from "../Pages/Home";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import TermsCondition from "../Pages/T&C";
+import Return from "../Pages/Return";
 
 const AllRoutes = () => {
   return (
@@ -31,6 +34,9 @@ const AllRoutes = () => {
         <Route path="/contact" element={<ContectUs />} />
         <Route path="/description/:type/:id" element={<DescriptionPage />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsCondition />} />
+        <Route path="/return" element={<Return />} />
         {/* <Route
           path="/wishlist"
           element={
