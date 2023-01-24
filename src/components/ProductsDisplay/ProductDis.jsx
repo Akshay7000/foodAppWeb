@@ -46,11 +46,12 @@ const ProductDis = ({ item, type }) => {
         borderRadius={"15px"}
         boxShadow={"xl"}
         h={"100%"}
+        minW={"230px"}
       >
         <Box
           overflow={"hidden"}
           position={"relative"}
-          height={"300px"}
+          height={"250px"}
           width={"95%"}
           borderRadius={"15px"}
           m="auto"

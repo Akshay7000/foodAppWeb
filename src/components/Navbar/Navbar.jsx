@@ -62,7 +62,6 @@ const Navbar = () => {
           // gap="10px"
           alignItems={"center"}
           bg={colorMode === "dark" ? "none" : "#13acbc"}
-          // px={15}
         >
           <HStack cursor={"pointer"}>
             <SideMenu colorMode={"dark"} />
@@ -120,6 +119,7 @@ const Navbar = () => {
               </Box>
             ) : (
               <Button
+                mr={"8"}
                 bg={"black"}
                 color={"whitesmoke"}
                 border={"1px solid beige"}
