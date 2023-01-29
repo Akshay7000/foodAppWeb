@@ -16,6 +16,7 @@ import FD from "../img/fd1.png";
 import Hyg from "../img/hyg.png";
 import milkBottels from "../img/milkBottels.jpg";
 import milkSplash from "../img/milksplash.png";
+import milkSplash0 from "../img/milk.jpg";
 import milkSplash1 from "../img/milksplash1.png";
 import bg from "../img/bg.png";
 
@@ -39,15 +40,15 @@ const Home = () => {
           <Box
             bg={"#13acbc"}
             pos={"relative"}
-            backgroundImage={milkSplash}
+            backgroundImage={milkSplash0}
             backgroundRepeat={"no-repeat"}
             backgroundSize={"cover"}
-            h={"90Vh"}
+            h={"100Vh"}
           >
             <Box
               w={isLargerThan ? "20%" : "50%"}
               pos={"absolute"}
-              top={"30%"}
+              top={"35%"}
               left={0}
               right={0}
               marginLeft={"auto"}
@@ -58,7 +59,7 @@ const Home = () => {
           </Box>
           <Box
             // h={"100vh"}
-            backgroundImage={milkSplash1}
+            // backgroundImage={milkSplash1}
             backgroundRepeat={"no-repeat"}
             backgroundSize={"cover"}
             p={"5"}
