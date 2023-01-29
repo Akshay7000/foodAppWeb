@@ -129,7 +129,7 @@ export const setToast = (
     status,
     duration,
     isClosable: true,
-    position: "top",
+    position: "bottom",
   });
 };
 export const checkCharacter = (str) => {

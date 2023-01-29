@@ -85,7 +85,6 @@ function SubscribeModal() {
     return true;
   };
   const FormSubmit = () => {
-    console.log("errpr");
     if (handleFormValidation(FormData)) {
       const {
         addressLine1,
@@ -114,7 +113,9 @@ function SubscribeModal() {
       };
       dispatch(profileUpdate(data));
       onClose();
+      setToast(toast, "Successfully Subscribed", "success");
     } else {
+      console.log("else", FormData);
     }
   };
 
