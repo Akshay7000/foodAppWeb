@@ -83,7 +83,7 @@ const Cart = () => {
           {cart?.length === 0 || cart === undefined ? (
             <Empty />
           ) : (
-            <div>
+            <div style={{ margin: "10% 0px " }}>
               <Box align="left" width={["90%", "87%", "85%", "87%"]} m="auto">
                 <Heading my={"2"}>YOUR BAG</Heading>
                 {/*   <Text my={"2"}>TOTAL [{cart?.length} items]</Text> */}

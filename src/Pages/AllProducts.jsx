@@ -26,19 +26,6 @@ const AllProducts = () => {
   const location = useLocation();
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   useEffect(() => {
-    // if (location.search || products?.length === 0) {
-    //   const sortBy = searchParams.get("sortBy");
-
-    //   const queryParams = {
-    //     params: {
-    //       category: searchParams.getAll("category"),
-    //       gender: searchParams.getAll("gender"),
-    //       colortype: searchParams.getAll("colortype"),
-    //       sizes: searchParams.getAll("sizes"),
-    //       _sort: sortBy && "rating",
-    //       _order: sortBy,
-    //     },
-    //   };
     dispatch(getData());
     // }
   }, [dispatch, location.search, products?.length, searchParams]);
@@ -55,30 +42,20 @@ const AllProducts = () => {
         <Loading />
       ) : (
         <>
-          {/* <Box w="95%" m="auto">
-
-            <Trending />
-          </Box> */}
           <Flex my={"10"}>
-            <Box w={isLargerThan ? "15%" : "10%"}>
-              {/* <FilterData /> */}
-              {/* <Fil  terChecked/> */}
-            </Box>
+            <Box w={isLargerThan ? "15%" : "10%"}></Box>
             <Spacer />
-            <Box width={"100%"}>
+            <Box>
               <Heading align={"left"} my={"10"}>
                 DEALS FOR YOU
               </Heading>
-              <Grid
-                templateColumns={
-                  isLargerThan ? "repeat(3, 1fr)" : "repeat(2, 1fr)"
-                }
-                // display={"flex"}
-                // flexWrap={"wrap"}
-                // alignItems={"center"}
-                // justifyContent={"center"}
-                gap={"15px"}
-                // background={"red"}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  margin: "0 20px 0 20px",
+                }}
               >
                 {products?.length > 0 &&
                   products?.map((item) => {
@@ -90,13 +67,10 @@ const AllProducts = () => {
                       />
                     );
                   })}
-              </Grid>
+              </div>
             </Box>
             <Spacer />
-            <Box w={isLargerThan ? "15%" : "10%"}>
-              {/* <FilterData /> */}
-              {/* <Fil  terChecked/> */}
-            </Box>
+            <Box w={isLargerThan ? "15%" : "10%"}></Box>
           </Flex>
 
           {/* {totalPosts > postPerPage && (

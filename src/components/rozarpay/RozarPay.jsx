@@ -22,7 +22,7 @@ const displayRazorpay = async (
   profileImg,
   dispatch
 ) => {
-  const { firstname, lastname, email, mobile } = form;
+  const { firstName, lastName, email, mobile } = form;
 
   const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
 
@@ -59,7 +59,7 @@ const displayRazorpay = async (
       });
     },
     prefill: {
-      name: `${firstname} ${lastname}`,
+      name: `${firstName} ${lastName}`,
       email: email,
       contact: mobile,
     },

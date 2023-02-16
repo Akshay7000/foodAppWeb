@@ -110,6 +110,7 @@ function SubscribeModal() {
         mobile,
         firstName,
         lastName,
+        status: "pending",
       };
       dispatch(profileUpdate(data));
       onClose();

@@ -9,8 +9,9 @@ const getData = (params) => async (dispatch) => {
       res.docs?.map((products) => {
         allproducts.push({ ...products.data(), id: products.id });
       });
+      var rankedSort = allproducts.sort((a, b) => a.rank - b.rank);
       console.log("getItem,", allproducts);
-      dispatch({ type: types.GET_DATA_S, payload: allproducts });
+      dispatch({ type: types.GET_DATA_S, payload: rankedSort });
     })
     .catch((err) => {
       dispatch({ type: types.GET_DATA_F });

@@ -35,18 +35,18 @@ const ProductDis = ({ item, type }) => {
   };
 
   return (
-    <div>
+    <div style={{ flex: "1 0 200px " }}>
       <Box
         key={id}
         m="auto"
         onClick={handleDes}
         my={"3"}
         border={"1px solid #d2d2d2b0"}
-        p={"2"}
+        p={"4"}
         borderRadius={"15px"}
         boxShadow={"xl"}
         h={"100%"}
-        minW={"230px"}
+        minW={"250px"}
       >
         <Box
           overflow={"hidden"}
@@ -77,22 +77,30 @@ const ProductDis = ({ item, type }) => {
           />
         </Box>
         <Box
-          color={"darkgray"}
+          color={"HighlightText"}
           fontSize={["xs", "sm", "md", "md"]}
           textTransform={"capitalize"}
           justifyContent={"space-between"}
           display={"flex"}
-          alignItems={"baseline"}
+          alignItems={"flex-start"}
           mx={"4"}
           my={"2"}
         >
-          <Text fontSize={"2xl"}>{productName ? productName : "-"}</Text>
+          <Text fontSize={"md"} maxW={"70%"}>
+            {productName ? productName : "-"}
+          </Text>
 
-          <Text color={"#13acbc"} fontWeight={"bold "}>
+          <Text
+            maxW={"30%"}
+            color={"#13acbc"}
+            fontWeight={"bold "}
+            flexWrap={"wrap"}
+            display={"flex"}
+          >
             {weight ? weight : "-"} {unit}
           </Text>
         </Box>
-        <HStack textAlign={"left"} my={"2"} mx={"4"}>
+        <HStack textAlign={"left"} my={"1"} mx={"3"} color={"darkgray"}>
           <Text
             fontSize={["sm", "md"]}
             textTransform={"capitalize"}

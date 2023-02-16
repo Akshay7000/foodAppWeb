@@ -19,15 +19,19 @@ import { displayRazorpay } from "../components/rozarpay/RozarPay";
 const Checkout = () => {
   const cart = useSelector((store) => store.cart.cart);
   const profileData = useSelector((state) => state.AuthReducer?.profileData);
+  console.log(
+    "🚀 ~ file: Checkout.jsx:22 ~ Checkout ~ profileData",
+    profileData
+  );
 
   const initialState = {
     firstName: profileData?.firstName,
     lastName: profileData?.lastName,
-    addressLine1: "",
-    addressLine2: "",
-    locality: "",
-    pinCode: "",
-    state: "",
+    addressLine1: profileData?.address?.addressLine1,
+    addressLine2: profileData?.address?.addressLine2,
+    locality: profileData?.address?.locality,
+    pinCode: profileData?.address?.pinCode,
+    state: profileData?.address?.state,
     country: "India",
     email: profileData?.email,
     mobile: profileData?.mobile,

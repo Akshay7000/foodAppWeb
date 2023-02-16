@@ -35,18 +35,20 @@ const SomethingNew = () => {
         <Loading />
       ) : (
         <>
-          <Flex my={"10"}>
+          <Flex my={"20"}>
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
             <Spacer />
-            <Box width={"100%"}>
+            <Box>
               <Heading align={"left"} my={"10"}>
                 TRY SOMETHING NEW
               </Heading>
-              <Grid
-                templateColumns={
-                  isLargerThan ? "repeat(3, 1fr)" : "repeat(2, 1fr)"
-                }
-                gap={"15px"}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                  margin: "0 20px 0 20px",
+                }}
               >
                 {featured?.length > 0 &&
                   featured?.map((item) => {
@@ -58,7 +60,7 @@ const SomethingNew = () => {
                       />
                     );
                   })}
-              </Grid>
+              </div>
             </Box>
             <Spacer />
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
