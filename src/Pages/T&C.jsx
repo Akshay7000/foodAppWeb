@@ -1,9 +1,10 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
 
 function TermsCondition() {
+  const [isLargerThan] = useMediaQuery("(min-width: 468px)");
   return (
     <div>
       <Navbar />
@@ -11,7 +12,7 @@ function TermsCondition() {
         <Loading />
       ) : (
         <>
-          <Box pt={"40"} pb={"20"} mx={"14"}>
+          <Box pt={"40"} pb={"20"} mx={"8"}>
             <Flex
               flexDir={"column"}
               h={"100%"}
@@ -36,7 +37,9 @@ function TermsCondition() {
                 alignItems={"center"}
                 // py={"42"}
                 textAlign={"left"}
-                fontSize={"calc(1.275rem + .3vw)"}
+                fontSize={
+                  isLargerThan ? "calc(1.275rem + .3vw)" : "calc(1rem + .30vw)"
+                }
               >
                 <Text>
                   www.avyayahealth.com is owned and operated by AVYAYA HEALTH
@@ -63,7 +66,9 @@ function TermsCondition() {
                 alignItems={"center"}
                 // py={"42"}
                 textAlign={"left"}
-                fontSize={"calc(1.275rem + .3vw)"}
+                fontSize={
+                  isLargerThan ? "calc(1.275rem + .3vw)" : "calc(1rem + .30vw)"
+                }
               >
                 <Text>
                   www.avyayahealth.com the User to surf the Website or making
@@ -94,7 +99,9 @@ function TermsCondition() {
                 py={"42"}
                 textAlign={"left"}
                 flexDirection={"column"}
-                fontSize={"calc(1.275rem + .3vw)"}
+                fontSize={
+                  isLargerThan ? "calc(1.275rem + .3vw)" : "calc(1rem + .30vw)"
+                }
                 gap={"4"}
               >
                 <Text>
@@ -123,7 +130,9 @@ function TermsCondition() {
                 py={"42"}
                 textAlign={"left"}
                 flexDirection={"column"}
-                fontSize={"calc(1.275rem + .3vw)"}
+                fontSize={
+                  isLargerThan ? "calc(1.275rem + .3vw)" : "calc(1rem + .30vw)"
+                }
                 gap={"4"}
               >
                 <Heading as="h6" size="3md">

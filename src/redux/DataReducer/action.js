@@ -7,7 +7,15 @@ const getData = (params) => async (dispatch) => {
     .then((res) => {
       var allproducts = [];
       res.docs?.map((products) => {
-        allproducts.push({ ...products.data(), id: products.id });
+        allproducts.push({
+          ...products.data(),
+          id: products.id,
+          weight:
+            products.data().weight >= 1000
+              ? products.data().weight / 1000
+              : products.data().weight,
+          unit: products.data().weight >= 1000 ? "Kg" : "gm",
+        });
       });
       var rankedSort = allproducts.sort((a, b) => a.rank - b.rank);
       console.log("getItem,", allproducts);

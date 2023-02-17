@@ -21,7 +21,15 @@ const getFeaturedProducts = (params) => async (dispatch) => {
     .then((res) => {
       var allproducts = [];
       res.docs?.map((products) => {
-        allproducts.push({ ...products.data(), id: products.id });
+        allproducts.push({
+          ...products.data(),
+          id: products.id,
+          weight:
+            products.data().weight >= 1000
+              ? products.data().weight / 1000
+              : products.data().weight,
+          unit: products.data().weight >= 1000 ? "Kg" : "gm",
+        });
       });
       // console.log("getFeaturedProducts,", allproducts);
       dispatch({ type: types.GET_FEATURED_DATA_S, payload: allproducts });
