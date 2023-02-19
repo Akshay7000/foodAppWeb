@@ -86,7 +86,7 @@ const Home = () => {
                     textAlign={"left"}
                     fontWeight={"bold"}
                   >
-                    PURE MILK FROM AVYAYA PURE MILK FROM AVYAYA
+                    PURE MILK FROM AVYAYA.
                   </Heading>
                   <Text
                     fontSize="xl"
