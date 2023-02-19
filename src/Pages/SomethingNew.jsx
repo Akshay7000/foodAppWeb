@@ -1,11 +1,4 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Spacer,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, useMediaQuery } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
@@ -53,11 +46,16 @@ const SomethingNew = () => {
                 {featured?.length > 0 &&
                   featured?.map((item) => {
                     return (
-                      <ProductDis
-                        key={item.key}
-                        item={item}
-                        type={"featured"}
-                      />
+                      <div
+                        key={item.id + item.description}
+                        style={{ flex: "1 0 200px " }}
+                      >
+                        <ProductDis
+                          key={item.key}
+                          item={item}
+                          type={"featured"}
+                        />
+                      </div>
                     );
                   })}
               </div>

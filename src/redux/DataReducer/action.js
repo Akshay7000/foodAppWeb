@@ -1,13 +1,13 @@
-import * as types from "./actionType";
 import axios from "axios";
 import { Products } from "../../Firebase/Collection";
+import * as types from "./actionType";
 const getData = (params) => async (dispatch) => {
   dispatch({ type: types.GET_DATA_R });
   return await Products.get()
     .then((res) => {
       var allproducts = [];
       res.docs?.map((products) => {
-        allproducts.push({
+        return allproducts.push({
           ...products.data(),
           id: products.id,
           weight:
@@ -18,7 +18,7 @@ const getData = (params) => async (dispatch) => {
         });
       });
       var rankedSort = allproducts.sort((a, b) => a.rank - b.rank);
-      console.log("getItem,", allproducts);
+
       dispatch({ type: types.GET_DATA_S, payload: rankedSort });
     })
     .catch((err) => {

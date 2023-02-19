@@ -38,7 +38,7 @@ const WishListShow = ({ item }) => {
           <Image
             src={image}
             alt={productName}
-            fallbackSrc="https://via.placeholder.com/150"
+            fallbacksrc="https://via.placeholder.com/150"
           />
           <Text fontWeight={"lightbold"}>{productName}</Text>
           {prices && (

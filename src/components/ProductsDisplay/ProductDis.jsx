@@ -1,41 +1,29 @@
-import { Badge, Box, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Badge, Box, HStack, Image, Text } from "@chakra-ui/react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 // import { AiOutlineStar } from "react-icons/ai";
-import { StarIcon } from "@chakra-ui/icons";
 
 const ProductDis = ({ item, type }) => {
   const navigate = useNavigate();
   const {
     id,
     name,
-    color,
-    gender,
-    images,
-    final_price,
-    reviews,
-    rating,
+
     description,
     image,
     price,
     productName,
-    rank,
+
     weight,
     unit = "kg",
   } = item;
-  const [img, setImg] = useState(image);
+
   const handleDes = () => {
     navigate(`/description/${type}/${id}`);
   };
-  const ChangeHoverImage = () => {
-    setImg(images[1]);
-  };
-  const OriginalImage = () => {
-    setImg(images[0]);
-  };
 
   return (
-    <div style={{ flex: "1 0 200px " }}>
+    <div>
       <Box
         key={id}
         m="auto"
@@ -71,9 +59,9 @@ const ProductDis = ({ item, type }) => {
           </Badge>
           <Image
             className="imageAnimation"
-            src={img}
+            src={image}
             alt={name}
-            fallbackSrc="https://via.placeholder.com/150"
+            fallbacksrc="https://via.placeholder.com/150"
           />
         </Box>
         <Box

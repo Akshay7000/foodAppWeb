@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addToCart } from "../../redux/CartReducer/action";
 import { getData } from "../../redux/DataReducer/action";
-import { addToWishList } from "../../redux/WishReducer/action";
+import { getFeaturedProducts } from "../../redux/PagesReducer/action";
 import Loading from "../Loading/Loading";
 import Navbar from "../Navbar/Navbar";
 import { setToast } from "../Other/CheckProperty";
@@ -32,28 +32,31 @@ const DescriptionPage = () => {
   const [currentProducts, setCurrentProducts] = useState({});
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const auth = useSelector((state) => state.AuthReducer.isAuth);
-  const [size, setSize] = useState(null);
+
   useEffect(() => {
     if (products.length === 0) {
       dispatch(getData());
     }
-  }, [dispatch, products.length]);
+    if (featured.length === 0) {
+      dispatch(getFeaturedProducts());
+    }
+  }, [dispatch, products.length, featured.length]);
   useEffect(() => {
     if (type === "products") {
       if (id) {
         const cur = products.find((item) => item.id === id);
-        console.log("products", cur);
+
         cur && setCurrentProducts(cur);
       }
     }
     if (type === "featured") {
       if (id) {
         const cur = featured.find((item) => item.id === id);
-        console.log("products", cur);
+
         cur && setCurrentProducts(cur);
       }
     }
-  }, [id, products]);
+  }, [id, products, featured, type]);
 
   const handleCart = () => {
     if (auth) {
@@ -91,7 +94,7 @@ const DescriptionPage = () => {
           <Box
             width={["100%", "100%", "60%", "60%"]}
             min-height={"100vh"}
-            fallbackSrc="https://via.placeholder.com/150"
+            fallbacksrc="https://via.placeholder.com/150"
           >
             {/* ------------------------------ 1 image------------------------------------ */}
             <Box>
@@ -100,7 +103,7 @@ const DescriptionPage = () => {
                 h={"580"}
                 objectFit={"contain"}
                 src={currentProducts?.image}
-                fallbackSrc="https://via.placeholder.com/150"
+                fallbacksrc="https://via.placeholder.com/150"
               />
             </Box>
 
@@ -156,7 +159,10 @@ const DescriptionPage = () => {
                   </span>
                 </Text>
                 <Text fontSize={"lg"}>
-                  weight :<span>{currentProducts.weight + " " + "kg"}</span>
+                  weight :
+                  <span>
+                    {" " + currentProducts.weight + " " + currentProducts.unit}
+                  </span>
                 </Text>
                 <Badge color={"grey"} fontWeight={"bold"}>
                   incl. of taxes and duties

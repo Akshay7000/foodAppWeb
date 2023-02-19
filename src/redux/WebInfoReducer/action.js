@@ -11,7 +11,6 @@ const getAboutData = (params) => async (dispatch) => {
   return await WebSettings.doc("about")
     .get()
     .then((res) => {
-      console.log("getItem,");
       var data = {
         ...res.data(),
         goals: goals.data()?.value,

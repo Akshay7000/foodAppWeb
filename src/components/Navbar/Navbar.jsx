@@ -5,7 +5,6 @@ import {
   HStack,
   Icon,
   Image,
-  Spacer,
   Text,
   useColorMode,
   useMediaQuery,
@@ -16,7 +15,6 @@ import logo from "../../img/icon.png";
 //import { FiUser } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { DarkModeBtn } from "../DarkMode/DarkModeBtn";
 import Profile from "../Profile/Profile";
 import SideMenu from "../Sidebar/Sidebar";
 
@@ -72,7 +70,7 @@ const Navbar = () => {
               m={2}
               src={logo}
               alt="logo"
-              fallbackSrc="https://via.placeholder.com/150"
+              fallbacksrc="https://via.placeholder.com/150"
             />
           </HStack>
           <HStack>
@@ -181,7 +179,7 @@ const Navbar = () => {
                   m={2}
                   src={logo}
                   alt="logo"
-                  fallbackSrc="https://via.placeholder.com/150"
+                  fallbacksrc="https://via.placeholder.com/150"
                 />
               </HStack>
               <NavLink

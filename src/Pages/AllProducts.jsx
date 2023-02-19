@@ -1,16 +1,7 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Spacer,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Spacer, useMediaQuery } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useSearchParams } from "react-router-dom";
-import Carousel from "../components/Carousel/Carousel";
-import Trending from "../components/Trends/Trending";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
 import ProductDis from "../components/ProductsDisplay/ProductDis";
@@ -60,11 +51,12 @@ const AllProducts = () => {
                 {products?.length > 0 &&
                   products?.map((item) => {
                     return (
-                      <ProductDis
-                        key={item.key}
-                        item={item}
-                        type={"products"}
-                      />
+                      <div
+                        key={item.id + item.description}
+                        style={{ flex: "1 0 200px " }}
+                      >
+                        <ProductDis item={item} type={"products"} />
+                      </div>
                     );
                   })}
               </div>

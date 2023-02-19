@@ -43,7 +43,7 @@ const AdminPage = () => {
                 width={"100%"}
                 src={item.images[0]}
                 alt={item.name}
-                fallbackSrc="https://via.placeholder.com/150"
+                fallbacksrc="https://via.placeholder.com/150"
               />
             </Box>
             {isLargerThan ? <Box w="15%">{item.name}</Box> : null}

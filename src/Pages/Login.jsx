@@ -14,8 +14,8 @@ import {
   Spinner,
   Stack,
   Text,
-  useToast,
   useMediaQuery,
+  useToast,
 } from "@chakra-ui/react";
 //import swal from "sweetalert";
 import React, { useState } from "react";
@@ -23,7 +23,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { login } from "../redux/AuthReducer/action";
 //import { LOGIN_S } from "../redux/AuthReducer/actionType";
-import Navbar from "../components/Navbar/Navbar";
 import { ViewIcon } from "@chakra-ui/icons";
 import logo from "../img/icon.png";
 const Login = () => {
@@ -74,7 +73,7 @@ const Login = () => {
                 m={2}
                 src={logo}
                 alt="logo"
-                fallbackSrc="https://via.placeholder.com/150"
+                fallbacksrc="https://via.placeholder.com/150"
               />
             </Box>
           </Stack>

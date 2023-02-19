@@ -14,11 +14,8 @@ import SubscribeModal from "../components/SubscribeModal/SubscribeModal";
 import cow from "../img/cow.png";
 import FD from "../img/fd1.png";
 import Hyg from "../img/hyg.png";
-import milkBottels from "../img/milkBottels.jpg";
-import milkSplash from "../img/milksplash.png";
 import milkSplash0 from "../img/milk.jpg";
-import milkSplash1 from "../img/milksplash1.png";
-import bg from "../img/bg.png";
+import milkBottels from "../img/milkBottels.jpg";
 
 import NA from "../img/nA.png";
 import { getSubscribepProducts } from "../redux/PagesReducer/action";
@@ -28,7 +25,7 @@ const Home = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   useEffect(() => {
     dispatch(getSubscribepProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

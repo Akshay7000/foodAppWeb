@@ -119,7 +119,7 @@ const Signup = () => {
               m={2}
               src={logo}
               alt="logo"
-              fallbackSrc="https://via.placeholder.com/150"
+              fallbacksrc="https://via.placeholder.com/150"
             />
           </Box>
         </Stack>

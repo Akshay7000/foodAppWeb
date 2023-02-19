@@ -34,7 +34,7 @@ const MyAccount = () => {
               w={"100%"}
               h={"100%"}
               objectFit={"contain"}
-              fallbackSrc="https://via.placeholder.com/150"
+              fallbacksrc="https://via.placeholder.com/150"
             />
           </Box>
           <Box

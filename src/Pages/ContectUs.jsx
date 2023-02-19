@@ -67,7 +67,7 @@ function ContectUs(props) {
                     width={"100%"}
                     height={"100%"}
                     alt={"call"}
-                    fallbackSrc="https://via.placeholder.com/150"
+                    fallbacksrc="https://via.placeholder.com/150"
                   />
                 </Box>
                 <Text
@@ -180,7 +180,7 @@ function ContectUs(props) {
                   my={"5"}
                   color={!colorMode === "dark" ? "white" : "black"}
                 >
-                  <a>
+                  <a href="/contact">
                     67 SANWARIYA KUNJ COLONY RAU RANGWASA MHOW INDORE (M.P.)
                     453331
                   </a>

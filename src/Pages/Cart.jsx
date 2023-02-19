@@ -10,12 +10,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Carousel from "../components/Carousel/Carousel";
 import CheckOutPage from "../components/checkout/CheckOutPage";
 import Empty from "../components/Empty/EmptyFunction";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
-import Trending from "../components/Trends/Trending";
 import {
   decQty,
   getCart,
@@ -39,7 +37,7 @@ const Cart = () => {
       }
     };
     init();
-  }, []);
+  }, [dispatch]);
 
   const handleIncrement = (id, qty) => {
     dispatch(incQty({ id, qty, uid }));
@@ -67,7 +65,7 @@ const Cart = () => {
   let quantity = 0;
   cart?.forEach((item) => {
     price += convertStringIntoNumber(item.price) * item.qty;
-    discount_price = discount_price;
+    discount_price = 0;
     quantity += item.qty;
   });
 
@@ -118,7 +116,7 @@ const Cart = () => {
                             objectFit={"cover"}
                             src={item.image}
                             alt="try"
-                            fallbackSrc="https://via.placeholder.com/150"
+                            fallbacksrc="https://via.placeholder.com/150"
                           />
                         </Box>
                         {/* -----------------------------------UP Image---------- Down description--------------------------------------------------------------------- */}
