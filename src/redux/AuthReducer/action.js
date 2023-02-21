@@ -41,7 +41,7 @@ const login = (payload, toast) => (dispatch) => {
   dispatch({ type: types.LOGIN_R });
 
   return customers
-    .where("email", "==", "anagaich@moreyeahs.in")
+    .where("email", "==", payload.email)
     .get()
     .then((res) => {
       console.log("res", res.empty);
@@ -58,7 +58,7 @@ const login = (payload, toast) => (dispatch) => {
             });
           })
           .catch((e) => {
-            setToast(toast, e.response.data.message, "error");
+            setToast(toast, e?.response?.data?.message, "error");
             dispatch({ type: types.LOGIN_F, payload: e });
           });
       } else {

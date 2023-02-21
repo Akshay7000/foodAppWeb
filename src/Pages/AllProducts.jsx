@@ -64,15 +64,6 @@ const AllProducts = () => {
             <Spacer />
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
           </Flex>
-
-          {/* {totalPosts > postPerPage && (
-            <Paginate
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalPosts={totalPosts}
-              postPerPage={postPerPage}
-            />
-          )} */}
         </>
       )}
     </div>

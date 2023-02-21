@@ -8,18 +8,18 @@ import AboutUs from "../Pages/AboutUs";
 import Cart from "../Pages/Cart";
 import Checkout from "../Pages/Checkout";
 import ContectUs from "../Pages/ContectUs";
+import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import MyAccount from "../Pages/MyAccount";
+import OrderHistory from "../Pages/OrderHistory";
 import OurTeam from "../Pages/OurTeam";
-import Register from "../Pages/SignUp";
-import Support from "../Pages/Support";
-import Authentication from "../PrivateRoute/Authentication";
-import SomethingNew from "../Pages/SomethingNew";
-import Home from "../Pages/Home";
-import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 import PrivacyPolicy from "../Pages/PrivacyPolicy";
-import TermsCondition from "../Pages/T&C";
 import Return from "../Pages/Return";
+import Register from "../Pages/SignUp";
+import SomethingNew from "../Pages/SomethingNew";
+import Support from "../Pages/Support";
+import TermsCondition from "../Pages/T&C";
+import Authentication from "../PrivateRoute/Authentication";
 
 const AllRoutes = () => {
   return (
@@ -69,6 +69,14 @@ const AllRoutes = () => {
           element={
             <Authentication>
               <Cart />
+            </Authentication>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Authentication>
+              <OrderHistory />
             </Authentication>
           }
         />

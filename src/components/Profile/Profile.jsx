@@ -1,28 +1,24 @@
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuGroup,
-  MenuDivider,
-  Button,
   //Icon,
   Avatar,
+  Button,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuList,
   Text,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import React, { useEffect } from "react";
 import { GrLogout } from "react-icons/gr";
 //import { FiUser } from "react-icons/fi";
+import { BsBagCheck, BsCartCheck } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { profile } from "../../redux/AuthReducer/action";
-import { ShowCoupon } from "../Coupon/ShowCoupon";
-import { CgProfile } from "react-icons/cg";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { BsCartCheck } from "react-icons/bs";
-import { RiCoupon3Line } from "react-icons/ri";
 import { getLocalData } from "../../utils/localStorage";
 const Profile = ({ colorMode }) => {
   const navigate = useNavigate();
@@ -89,17 +85,25 @@ const Profile = ({ colorMode }) => {
             </MenuItem>
             <MenuDivider />
             {auth ? (
-              <MenuItem onClick={() => navigate("/myaccount")}>
-                <Avatar
-                  size={"xs"}
-                  marginRight={"2"}
-                  name={profileData.length !== 0 ? profileData.firstName : ""}
-                  src={profileData.length !== 0 ? profileData.description : ""}
-                />
-                <Text fontSize={"sm"}>
-                  {profileData.length !== 0 ? profileData.email : ""}
-                </Text>
-              </MenuItem>
+              <>
+                <MenuItem onClick={() => navigate("/myaccount")}>
+                  <Avatar
+                    size={"xs"}
+                    marginRight={"2"}
+                    name={profileData.length !== 0 ? profileData.firstName : ""}
+                    src={
+                      profileData.length !== 0 ? profileData.description : ""
+                    }
+                  />
+                  <Text fontSize={"sm"}>
+                    {profileData.length !== 0 ? profileData.email : ""}
+                  </Text>
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/orders")} mx={"1"}>
+                  <BsBagCheck color={"blue"} marginRight={"2"} />
+                  <Text marginLeft={"2"}>Order History</Text>
+                </MenuItem>{" "}
+              </>
             ) : (
               <MenuItem onClick={() => navigate("/myaccount")}>
                 <CgProfile /> My Account
