@@ -86,16 +86,19 @@ const ccAvanue = async (amount, form, cart, quantity) => {
     "Content-Type": "application/x-www-form-urlencoded",
   };
 
-  var urlRedirect = "http%3A%2F%2Flocalhost%3A3001%2FccavResponseHandler";
+  var urlRedirect = "https://cc-backend.vercel.app/ccavResponseHandler";
   var currentURl = window?.location?.hostname;
 
   let bodyContent = `merchant_id=2045995&order_id=${randomString()}&currency=INR&amount=${amount}&redirect_url=${urlRedirect}&cancel_url=${urlRedirect}r&language=EN&billing_name=${firstName} ${lastName}&billing_address=${addressLine1} ${addressLine2}&billing_city=${locality}&billing_state=${state}&billing_zip=${pinCode}&billing_country=${country}&billing_tel=${mobile}&billing_email=${email}&delivery_name=${firstName} ${lastName}&delivery_address=${addressLine1} ${addressLine2}&delivery_city=${locality}&delivery_state=${state}&delivery_zip=${pinCode}&delivery_country=${country}&delivery_tel=${mobile}&merchant_param1=${quantity}&merchant_param2=${currentURl}`;
 
-  let response = await fetch("http://localhost:3001/ccavRequestHandler", {
-    method: "POST",
-    body: bodyContent,
-    headers: headersList,
-  });
+  let response = await fetch(
+    "https://cc-backend.vercel.app/ccavRequestHandler",
+    {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    }
+  );
 
   let data = await response.text();
 
