@@ -130,9 +130,13 @@ const Checkout = () => {
   // ===========================Login UP===============================================================
 
   const ProceedForOrder = (res) => {
+    var loc =
+      window.location.hostname === "localhost"
+        ? "AVBE21KB97BJ46EBJB"
+        : "AVIE16KB40AF84EIFA";
     var f = document.createElement("form");
     f.action =
-      "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+      "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
     f.method = "POST";
     f.redirect = "redirect";
     f.id = "nonseamless";
@@ -146,7 +150,7 @@ const Checkout = () => {
     ac.type = "hidden";
     ac.id = "access_code";
     ac.name = "access_code";
-    ac.value = "AVBE21KB97BJ46EBJB";
+    ac.value = loc;
     f.appendChild(i);
 
     f.appendChild(ac);
