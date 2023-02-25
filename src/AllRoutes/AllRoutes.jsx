@@ -20,11 +20,14 @@ import SomethingNew from "../Pages/SomethingNew";
 import Support from "../Pages/Support";
 import TermsCondition from "../Pages/T&C";
 import Authentication from "../PrivateRoute/Authentication";
+import OrderSuccess from "../Pages/OrderSuccess";
 
 const AllRoutes = () => {
   return (
     <div>
       <Routes>
+        <Route path="*" element={<Home />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<AllProducts />} />
         <Route path="/something-new" element={<SomethingNew />} />
@@ -37,14 +40,7 @@ const AllRoutes = () => {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsCondition />} />
         <Route path="/return" element={<Return />} />
-        {/* <Route
-          path="/wishlist"
-          element={
-            <Authentication>
-              <WishList />
-            </Authentication>
-          }
-        /> */}
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route
@@ -69,6 +65,14 @@ const AllRoutes = () => {
           element={
             <Authentication>
               <Cart />
+            </Authentication>
+          }
+        />
+        <Route
+          path="/orderSuccess"
+          element={
+            <Authentication>
+              <OrderSuccess />
             </Authentication>
           }
         />

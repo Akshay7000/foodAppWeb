@@ -2,6 +2,7 @@ import { Box, Flex, useMediaQuery, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AlertCustom from "../components/Alert/Alert";
 import { CheckoutForm } from "../components/checkout/CheckoutForm";
 import CheckOutPage from "../components/checkout/CheckOutPage";
 import { InputCoupon } from "../components/InputCoupon/InputCoupon";
@@ -14,16 +15,14 @@ import {
   checkPinCode,
   setToast,
 } from "../components/Other/CheckProperty";
-import { displayRazorpay } from "../components/rozarpay/RozarPay";
+import { ccAvanue, displayRazorpay } from "../components/rozarpay/RozarPay";
+import { profileUpdate } from "../redux/AuthReducer/action";
 
 const Checkout = () => {
   const cart = useSelector((store) => store.cart.cart);
   const profileData = useSelector((state) => state.AuthReducer?.profileData);
-  console.log(
-    "🚀 ~ file: Checkout.jsx:22 ~ Checkout ~ profileData",
-    profileData
-  );
 
+  const [AlerState, setAlerState] = useState(false);
   const initialState = {
     firstName: profileData?.firstName,
     lastName: profileData?.lastName,
@@ -38,9 +37,9 @@ const Checkout = () => {
   };
   const [dis, setDis] = useState("");
   const toast = useToast();
-  const navigate = useNavigate();
+
   const [form, setForm] = useState(initialState);
-  const profileImg = profileData.description;
+
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const dispatch = useDispatch();
 
@@ -84,9 +83,29 @@ const Checkout = () => {
     if (!handleFormValidation(form)) {
       return;
     } else {
-      displayRazorpay(price, form, navigate, profileImg, dispatch);
+      ccAvanue(price, form, cart, quantity)
+        .then((res) => {
+          var data = {
+            address: {
+              addressLine1: form.addressLine1,
+              addressLine2: form.addressLine2,
+              locality: form.locality,
+              pinCode: form.pinCode,
+              state: form.state,
+            },
+            mobile: form.mobile,
+            firstName: form.firstName,
+            lastName: form.lastName,
+          };
+          console.log("🚀 ~ file: Checkout.jsx:101 ~ .then ~ data:", data);
+
+          dispatch(profileUpdate(data));
+          ProceedForOrder(res);
+        })
+        .catch((err) => console.log("error->>>>", err));
     }
   };
+
   // =====================Login Down========================================================================
   const convertStringIntoNumber = (str) => {
     if (Number(str)) {
@@ -109,6 +128,33 @@ const Checkout = () => {
   let total_discount = Math.floor(discount_price - dis);
 
   // ===========================Login UP===============================================================
+
+  const ProceedForOrder = (res) => {
+    var f = document.createElement("form");
+    f.action =
+      "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+    f.method = "POST";
+    f.redirect = "redirect";
+    f.id = "nonseamless";
+
+    var i = document.createElement("input");
+    i.type = "hidden";
+    i.id = "encRequest";
+    i.name = "encRequest";
+    i.value = res;
+    var ac = document.createElement("input");
+    ac.type = "hidden";
+    ac.id = "access_code";
+    ac.name = "access_code";
+    ac.value = "AVBE21KB97BJ46EBJB";
+    f.appendChild(i);
+
+    f.appendChild(ac);
+
+    document.body.appendChild(f);
+    f.submit();
+  };
+
   return (
     <div>
       <Navbar /> <br />
@@ -118,6 +164,17 @@ const Checkout = () => {
         flexDirection={isLargerThan ? "row" : "column-reverse"}
         w="90%"
       >
+        <AlertCustom
+          MainBtn="Proceed"
+          OnClose={() => setAlerState(false)}
+          onOK={() => {
+            ProceedForOrder();
+            setAlerState(false);
+          }}
+          showAlert={AlerState}
+          Title={"Confirm Your Order!"}
+          // Description={"Would you like to Procede with ?"}
+        />
         <CheckoutForm
           isLargerThan={isLargerThan}
           onChange={handleOnChange}

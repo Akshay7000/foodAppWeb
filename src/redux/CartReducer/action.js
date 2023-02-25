@@ -14,7 +14,7 @@ const getCart = (params) => (dispatch) => {
       res.docs?.map((products) => {
         allproducts.push({ ...products.data() });
       });
-      console.log("all product cart--->", allproducts);
+
       dispatch({ type: types.GET_CART_S, payload: allproducts });
       return allproducts;
     })
@@ -24,7 +24,7 @@ const getCart = (params) => (dispatch) => {
 };
 const incQty = (params) => (dispatch) => {
   dispatch({ type: types.GET_CART_R });
-  console.log("params", params);
+
   var qty = params.qty === NaN ? 0 : params.qty;
   return customers
     .doc(params.uid)
@@ -54,7 +54,7 @@ const decQty = (params) => (dispatch) => {
 //   payload,
 // });
 const removeItem = (params) => (dispatch) => {
-  dispatch({ type: types.GET_CART_R });
+  // dispatch({ type: types.GET_CART_R });
   console.log("params", params);
 
   return customers

@@ -9,14 +9,19 @@ import {
   useColorMode,
   useMediaQuery,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../img/icon.png";
 //import { FiUser } from "react-icons/fi";
 import { BsBag } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Profile from "../Profile/Profile";
 import SideMenu from "../Sidebar/Sidebar";
+import { getCart } from "../../redux/CartReducer/action";
+import { getLocalData } from "../../utils/localStorage";
+import { getData } from "../../redux/DataReducer/action";
+import { getFeaturedProducts } from "../../redux/PagesReducer/action";
+import { getOrders } from "../../redux/OrderReducer/acton";
 
 const Navbar = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
@@ -24,6 +29,18 @@ const Navbar = () => {
   const auth = useSelector((state) => state.AuthReducer.isAuth);
 
   const cart = useSelector((store) => store.cart.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const token = getLocalData("token");
+
+    if (token?.uid) {
+      dispatch(getOrders(token.uid));
+      dispatch(getCart(token.uid));
+      dispatch(getData());
+      dispatch(getFeaturedProducts());
+    }
+  }, [dispatch]);
+
   // const wishlist = useSelector((store) => store.wishReducer.wishlist);
   const { colorMode } = useColorMode();
   const baseStyle = {

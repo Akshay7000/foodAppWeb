@@ -64,8 +64,8 @@ const Profile = ({ colorMode }) => {
           <Avatar
             size={"sm"}
             bg={"black"}
-            name={profileData.length !== 0 ? profileData.firstName : ""}
-            src={profileData.length !== 0 ? profileData.description : ""}
+            name={profileData?.length !== 0 ? profileData.firstName : ""}
+            src={profileData?.length !== 0 ? profileData.description : ""}
           />
           <Text
             fontSize={"xs"}
@@ -73,7 +73,7 @@ const Profile = ({ colorMode }) => {
             color={"white"}
             textTransform={"capitalize"}
           >
-            {profileData.length !== 0 ? profileData.firstName : ""}
+            {profileData?.length !== 0 ? profileData.firstName : ""}
           </Text>
         </MenuButton>
         <MenuList>
@@ -90,13 +90,15 @@ const Profile = ({ colorMode }) => {
                   <Avatar
                     size={"xs"}
                     marginRight={"2"}
-                    name={profileData.length !== 0 ? profileData.firstName : ""}
+                    name={
+                      profileData?.length !== 0 ? profileData.firstName : ""
+                    }
                     src={
-                      profileData.length !== 0 ? profileData.description : ""
+                      profileData?.length !== 0 ? profileData.description : ""
                     }
                   />
                   <Text fontSize={"sm"}>
-                    {profileData.length !== 0 ? profileData.email : ""}
+                    {profileData?.length !== 0 ? profileData.email : ""}
                   </Text>
                 </MenuItem>
                 <MenuItem onClick={() => navigate("/orders")} mx={"1"}>

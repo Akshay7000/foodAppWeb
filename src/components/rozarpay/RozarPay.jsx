@@ -68,5 +68,61 @@ const displayRazorpay = async (
   const paymentObject = new window.Razorpay(options);
   paymentObject.open();
 };
+const ccAvanue = async (amount, form, cart, quantity) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    mobile,
+    addressLine1,
+    addressLine2,
+    locality,
+    state,
+    pinCode,
+    country,
+  } = form;
 
-export { displayRazorpay };
+  let headersList = {
+    "Content-Type": "application/x-www-form-urlencoded",
+  };
+
+  var urlRedirect = "http%3A%2F%2Flocalhost%3A3001%2FccavResponseHandler";
+  var currentURl = window?.location?.hostname;
+
+  let bodyContent = `merchant_id=2045995&order_id=${randomString()}&currency=INR&amount=${amount}&redirect_url=${urlRedirect}&cancel_url=${urlRedirect}r&language=EN&billing_name=${firstName} ${lastName}&billing_address=${addressLine1} ${addressLine2}&billing_city=${locality}&billing_state=${state}&billing_zip=${pinCode}&billing_country=${country}&billing_tel=${mobile}&billing_email=${email}&delivery_name=${firstName} ${lastName}&delivery_address=${addressLine1} ${addressLine2}&delivery_city=${locality}&delivery_state=${state}&delivery_zip=${pinCode}&delivery_country=${country}&delivery_tel=${mobile}&merchant_param1=${quantity}&merchant_param2=${currentURl}`;
+
+  let response = await fetch("http://localhost:3001/ccavRequestHandler", {
+    method: "POST",
+    body: bodyContent,
+    headers: headersList,
+  });
+
+  let data = await response.text();
+
+  return data;
+};
+function getJsonData(query) {
+  let arrayOfKeyValues = query.split(",");
+  let modifiedArray = new Array();
+
+  for (let i = 0; i < arrayOfKeyValues.length; i++) {
+    let arrayValues = arrayOfKeyValues[i].split(":");
+    let arrayString =
+      '"' + arrayValues[0] + '"' + ":" + '"' + arrayValues[1] + '"';
+    modifiedArray.push(arrayString);
+  }
+  let jsonDataString = "{" + modifiedArray.toString() + "}";
+  let jsonData = JSON.parse(jsonDataString);
+
+  return jsonData;
+}
+function randomString(
+  length = 12,
+  chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+) {
+  var result = "";
+  for (var i = length; i > 0; --i)
+    result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+export { displayRazorpay, ccAvanue, getJsonData };

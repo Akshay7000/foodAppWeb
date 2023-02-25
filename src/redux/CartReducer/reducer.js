@@ -94,7 +94,6 @@ const cartReducer = (state = init, action) => {
       };
     }
     case data.GET_CART_S: {
-      console.log("GET_CART_S", payload);
       return {
         ...state,
         isLoading: false,
@@ -108,6 +107,21 @@ const cartReducer = (state = init, action) => {
         isError: true,
       };
     }
+    case data.CLEAR_CART: {
+      console.log("CLEAR_CART------", payload);
+      customers
+        .doc(payload)
+        .collection("cart")
+        .get()
+        .then((res) => {
+          res.docs.map((item) =>
+            customers.doc(payload).collection("cart").doc(item.id).delete()
+          );
+        })
+        .catch((err) => console.log("errr", err));
+      return { ...state, cart: [] };
+    }
+
     default:
       return state;
   }

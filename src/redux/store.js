@@ -12,6 +12,7 @@ import { reducer as AuthReducer } from "./AuthReducer/reducer";
 import { cartReducer } from "./CartReducer/reducer";
 import { pagesReducer } from "./PagesReducer/reducer";
 import { wishReducer } from "./WishReducer/wishReducer";
+import { orderReducer } from "./OrderReducer/reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   pagesReducer,
   wishReducer,
   AboutReducer,
+  orderReducer,
 });
 
 const store = legacy_createStore(

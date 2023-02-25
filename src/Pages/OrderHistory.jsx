@@ -11,21 +11,33 @@ import {
   useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
-import { useSelector } from "react-redux";
+import moment from "moment";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
 import ProductDis from "../components/ProductsDisplay/ProductDis";
+import { getOrders } from "../redux/OrderReducer/acton";
+import { getLocalData } from "../utils/localStorage";
 
 function OrderHistory() {
-  var loading = false;
+  const orders = useSelector((state) => state.orderReducer);
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
+  const dispatch = useDispatch();
 
-  const products = useSelector((store) => store?.dataReducer?.products);
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = async () => {
+    const token = getLocalData("token");
+    dispatch(getOrders(token.uid));
+  };
+
   return (
     <div className="AllProducts">
       <Navbar /> <br />
-      {loading ? (
+      {orders.isLoading ? (
         <Loading />
       ) : (
         <>
@@ -33,9 +45,7 @@ function OrderHistory() {
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
             <Spacer />
             <Box>
-              <Heading align={"left"} my={"20"}>
-                YOUR ORDERS
-              </Heading>
+              <Heading my={"20"}>YOUR ORDERS</Heading>
               <div
                 style={{
                   display: "flex",
@@ -45,28 +55,28 @@ function OrderHistory() {
                   justifyContent: "space-around",
                 }}
               >
-                {products?.length > 0 &&
-                  products?.map((item) => {
+                {orders?.orders?.length > 0 &&
+                  orders?.orders?.map((OrderItem) => {
                     const {
-                      id,
-                      name,
-
-                      description,
+                      order_id,
+                      trans_date,
+                      order_status = order_status?.replaceAll("%20", " "),
+                      payment_mode = payment_mode?.replaceAll("%20", " "),
+                      card_name = card_name?.replaceAll("%20", " "),
                       image,
-                      price,
-                      productName,
-
-                      weight,
+                      delivery_address,
+                      amount,
+                      item,
+                      merchant_param1,
                       unit = "kg",
-                    } = item;
+                    } = OrderItem;
 
                     return (
                       <Box
-                        key={item.id + item.description}
+                        key={item.trans_date + item.bank_ref_no}
                         flex={isLargerThan ? "0 0 600px " : "0 0 100%"}
                       >
                         <Box
-                          key={id}
                           m="auto"
                           my={"3"}
                           border={"1px solid #d2d2d2b0"}
@@ -88,73 +98,91 @@ function OrderHistory() {
                             justifyContent={"space-between"}
                           >
                             <Box textAlign={"left"}>
-                              <Text fontSize={"2xl"}>Order ID: 1234567</Text>
+                              <Text fontSize={"2xl"}>Order ID: {order_id}</Text>
                               <Text fontSize={"md"} color={"gray.500"}>
-                                Order Date: 12 june 2023
+                                Order Date:{" "}
+                                {moment(
+                                  trans_date?.split("%20")[0],
+                                  "DD/MM/YYYY"
+                                ).format("DD MMM YYYY")}
                               </Text>
                             </Box>
                             <Box textAlign={"right"}>
                               <Text fontSize={"xl"}>Status</Text>
                               <Text
                                 fontSize={"xs"}
-                                backgroundColor={"red.200"}
+                                backgroundColor={
+                                  order_status === "Failure"
+                                    ? "red.200"
+                                    : "green.200"
+                                }
                                 px={"20px"}
                                 py={"4px"}
                                 borderRadius={"12px"}
                               >
-                                Pending
+                                {order_status}
                               </Text>
                             </Box>
                           </Box>
                           <Divider />
 
-                          <HStack
-                            textAlign={"left"}
-                            my={"5"}
-                            mx={"3"}
-                            color={"gray.800"}
-                          >
-                            <Flex flexDir={"row"} w={"100%"}>
-                              <Box width={"100px"} h={"100px"}>
-                                <Image
-                                  w={"100%"}
-                                  h={"100%"}
-                                  src={image}
-                                  objectFit={"cover"}
-                                  borderRadius={"15px"}
-                                />
-                              </Box>
-                              <Flex
-                                w={"80%"}
-                                justifyContent={"space-between"}
-                                alignItems={"center"}
-                                px={"5"}
+                          {item.map((prod) => {
+                            return (
+                              <HStack
+                                key={prod?.image + order_id}
+                                textAlign={"left"}
+                                my={"5"}
+                                mx={"3"}
+                                color={"gray.800"}
                               >
-                                <Flex
-                                  flexDir={"column"}
-                                  // alignItems={"center"}
-                                  h={"60%"}
-                                  justifyContent={"space-around"}
-                                >
-                                  <Text fontSize={"xl"} fontWeight={"bold"}>
-                                    Milk
-                                  </Text>
-                                  <Text fontSize={"sm"}>500 Gm</Text>
+                                <Flex flexDir={"row"} w={"100%"}>
+                                  <Box width={"100px"} h={"100px"}>
+                                    <Image
+                                      w={"100%"}
+                                      h={"100%"}
+                                      src={prod?.image}
+                                      objectFit={"cover"}
+                                      borderRadius={"15px"}
+                                    />
+                                  </Box>
+                                  <Flex
+                                    w={"80%"}
+                                    justifyContent={"space-between"}
+                                    alignItems={"center"}
+                                    px={"5"}
+                                  >
+                                    <Flex
+                                      flexDir={"column"}
+                                      // alignItems={"center"}
+                                      h={"60%"}
+                                      justifyContent={"space-around"}
+                                    >
+                                      <Text fontSize={"xl"} fontWeight={"bold"}>
+                                        {prod?.productName}
+                                      </Text>
+                                      <Text fontSize={"sm"}>
+                                        {prod?.weight}{" "}
+                                        {prod?.unit ? prod?.unit : "gm"}
+                                      </Text>
+                                    </Flex>
+                                    <Flex
+                                      flexDir={"column"}
+                                      alignItems={"end"}
+                                      h={"60%"}
+                                      justifyContent={"space-around"}
+                                    >
+                                      <Text fontSize={"xl"} fontWeight={"bold"}>
+                                        ₹ {prod.price}
+                                      </Text>
+                                      <Text fontSize={"sm"}>
+                                        QTY: {prod.qty}
+                                      </Text>
+                                    </Flex>
+                                  </Flex>
                                 </Flex>
-                                <Flex
-                                  flexDir={"column"}
-                                  alignItems={"end"}
-                                  h={"60%"}
-                                  justifyContent={"space-around"}
-                                >
-                                  <Text fontSize={"xl"} fontWeight={"bold"}>
-                                    ₹ 1234
-                                  </Text>
-                                  <Text fontSize={"sm"}>QTY: 3</Text>
-                                </Flex>
-                              </Flex>
-                            </Flex>
-                          </HStack>
+                              </HStack>
+                            );
+                          })}
                           <Divider />
 
                           <HStack>
@@ -168,7 +196,11 @@ function OrderHistory() {
                                 <Text fontSize={"xl"} fontWeight={"black"}>
                                   Paymnet
                                 </Text>
-                                <Text fontSize={"6xs"}>Visa **88</Text>
+                                <Text fontSize={"6xs"}>
+                                  {payment_mode?.replaceAll("%20", " ") +
+                                    " - " +
+                                    card_name?.replaceAll("%20", " ")}
+                                </Text>
                               </Box>
 
                               <Box>
@@ -179,8 +211,9 @@ function OrderHistory() {
                                   Address
                                 </Text>
                                 <Text fontSize={"6xs"}>
-                                  249, Barfani Dham,MR9 INDORE MP, barfani Dham,
-                                  MR9 INDORE MP
+                                  {delivery_address
+                                    ?.replaceAll("%20", " ")
+                                    ?.toUpperCase()}
                                 </Text>
                               </Box>
                             </Box>
@@ -205,8 +238,10 @@ function OrderHistory() {
                                     </Text>
                                   </Box>
                                   <Box textAlign={"right"}>
-                                    <Text fontSize={"6xs"}>₹ 249</Text>
-                                    <Text fontSize={"6xs"}>3</Text>
+                                    <Text fontSize={"6xs"}>₹ {amount}</Text>
+                                    <Text fontSize={"6xs"}>
+                                      {merchant_param1}
+                                    </Text>
                                   </Box>
                                 </HStack>
                               </Box>

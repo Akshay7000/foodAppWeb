@@ -13,7 +13,7 @@ import React from "react";
 
 const AlertCustom = ({
   showAlert,
-
+  MainBtn = "Update",
   Title,
   Description,
   onOK,
@@ -23,7 +23,7 @@ const AlertCustom = ({
     <>
       <Modal isOpen={showAlert} onClose={OnClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent top={"20%"}>
           <Alert
             status="success"
             variant="top-accent"
@@ -32,6 +32,7 @@ const AlertCustom = ({
             justifyContent="center"
             textAlign="center"
             height="250px"
+            alignSelf={"center"}
           >
             <AlertIcon boxSize="40px" mr={0} />
             <AlertTitle mt={4} mb={1} fontSize="lg">
@@ -49,7 +50,7 @@ const AlertCustom = ({
                   border: "1px solid black",
                 }}
               >
-                Update
+                {MainBtn}
               </Button>
               <Button
                 onClick={OnClose}

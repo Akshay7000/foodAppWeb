@@ -36,7 +36,7 @@ const register = (payload, toast) => (dispatch) => {
     });
 };
 
-const login = (payload, toast) => (dispatch) => {
+const login = (payload, toast) => async (dispatch) => {
   saveLocalData("userInfo", payload.email);
   dispatch({ type: types.LOGIN_R });
 
@@ -44,7 +44,6 @@ const login = (payload, toast) => (dispatch) => {
     .where("email", "==", payload.email)
     .get()
     .then((res) => {
-      console.log("res", res.empty);
       if (!res.empty) {
         return auth
           .signInWithEmailAndPassword(payload.email, payload.password)
@@ -52,14 +51,14 @@ const login = (payload, toast) => (dispatch) => {
             setToast(toast, "Login Successful", "success");
             const user = r.user;
             console.log(user);
-            dispatch({
+            return dispatch({
               type: types.LOGIN_S,
               payload: { email: user.email, uid: user.uid },
             });
           })
           .catch((e) => {
-            setToast(toast, e?.response?.data?.message, "error");
-            dispatch({ type: types.LOGIN_F, payload: e });
+            setToast(toast, "Invalid user credentials.", "error");
+            return dispatch({ type: types.LOGIN_F, payload: e });
           });
       } else {
         throw "User Not Found";
@@ -69,7 +68,7 @@ const login = (payload, toast) => (dispatch) => {
       console.log("error", err);
       setToast(toast, err, "error");
       dispatch({ type: types.LOGIN_F, payload: err });
-      throw err;
+      return err;
     });
 };
 
@@ -88,6 +87,7 @@ const profile = (payload) => async (dispatch) => {
 };
 const profileUpdate = (payload) => async (dispatch) => {
   const token = getLocalData("token");
+
   dispatch({ type: types.UPDATE_PROFILE_R });
   return await customers
     .doc(token?.uid)
@@ -95,10 +95,12 @@ const profileUpdate = (payload) => async (dispatch) => {
     .then((r) => {
       dispatch({
         type: types.UPDATE_PROFILE_S,
-        payload: r.data(),
+        payload: payload,
       });
     })
-    .catch((e) => dispatch({ type: types.UPDATE_PROFILE_F, payload: e }));
+    .catch((e) => {
+      dispatch({ type: types.UPDATE_PROFILE_F, payload: e });
+    });
 };
 
 export { login, register, profile, profileUpdate };

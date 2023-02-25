@@ -55,7 +55,7 @@ const Login = () => {
         password,
       };
       dispatch(login(params, toast)).then((res) => {
-        navigate(pathRoute, { replace: true });
+        if (res.type === "LOGIN_S") navigate(pathRoute, { replace: true });
       });
     }
   };

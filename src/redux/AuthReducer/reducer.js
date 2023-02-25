@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
     case types.UPDATE_PROFILE_S: {
       return {
         ...state,
-        profileData: payload,
+        profileData: { ...state.profileData, payload },
       };
     }
     case types.UPDATE_PROFILE_R: {

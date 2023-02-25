@@ -10,10 +10,12 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 import CheckOutPage from "../components/checkout/CheckOutPage";
 import Empty from "../components/Empty/EmptyFunction";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
+import { getJsonData } from "../components/rozarpay/RozarPay";
 import {
   decQty,
   getCart,
@@ -24,6 +26,8 @@ import { getLocalData } from "../utils/localStorage";
 
 const Cart = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
+  const location = useLocation().search.substring(1);
+
   const cart = useSelector((store) => store?.cart?.cart);
   const loading = useSelector((store) => store?.cart?.isLoading);
   const uid = useSelector((store) => store?.AuthReducer?.profileData?.uid);

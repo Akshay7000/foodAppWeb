@@ -33,7 +33,7 @@ const AllProducts = () => {
         <Loading />
       ) : (
         <>
-          <Flex my={"10"}>
+          <Flex my={"20"}>
             <Box w={isLargerThan ? "15%" : "10%"}></Box>
             <Spacer />
             <Box>
