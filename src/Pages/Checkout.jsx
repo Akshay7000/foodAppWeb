@@ -132,7 +132,7 @@ const Checkout = () => {
   const ProceedForOrder = (res) => {
     var f = document.createElement("form");
     f.action =
-      "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+      "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
     f.method = "POST";
     f.redirect = "redirect";
     f.id = "nonseamless";
