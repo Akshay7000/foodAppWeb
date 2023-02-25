@@ -134,9 +134,14 @@ const Checkout = () => {
       window.location.hostname === "localhost"
         ? "AVBE21KB97BJ46EBJB"
         : "AVIE16KB40AF84EIFA";
+
+    var action_url =
+      window.location.hostname === "localhost"
+        ? "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction"
+        : "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
     var f = document.createElement("form");
-    f.action =
-      "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+    f.action = action_url;
+
     f.method = "POST";
     f.redirect = "redirect";
     f.id = "nonseamless";
