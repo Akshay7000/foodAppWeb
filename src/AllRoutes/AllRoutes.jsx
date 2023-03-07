@@ -21,6 +21,7 @@ import Support from "../Pages/Support";
 import TermsCondition from "../Pages/T&C";
 import Authentication from "../PrivateRoute/Authentication";
 import OrderSuccess from "../Pages/OrderSuccess";
+import ResetPassword from "../Pages/ResetPassword";
 
 const AllRoutes = () => {
   return (
@@ -43,6 +44,7 @@ const AllRoutes = () => {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route
           path="/myaccount"
           element={

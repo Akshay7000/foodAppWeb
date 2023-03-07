@@ -2,10 +2,13 @@ import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Empty = () => {
+const Empty = ({
+  heading = "Your Bag is Empty",
+  body = "Once you add something to your bag - it will appear here. Ready to get started?",
+}) => {
   const navigate = useNavigate();
   const handleproducts = () => {
-    navigate("/");
+    navigate("/products");
   };
   return (
     <div>
@@ -21,11 +24,10 @@ const Empty = () => {
       >
         <Box>
           <Heading mx={"4"} my={"6"} textTransform={"uppercase"}>
-            Your Bag is Empty
+            {heading}
           </Heading>
           <Text mx={"4"} my={"6"}>
-            Once you add something to your bag - it will appear here. Ready to
-            get started?
+            {body}
           </Text>
 
           <Button

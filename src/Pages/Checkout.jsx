@@ -97,7 +97,6 @@ const Checkout = () => {
             firstName: form.firstName,
             lastName: form.lastName,
           };
-          console.log("🚀 ~ file: Checkout.jsx:101 ~ .then ~ data:", data);
 
           dispatch(profileUpdate(data));
           ProceedForOrder(res);

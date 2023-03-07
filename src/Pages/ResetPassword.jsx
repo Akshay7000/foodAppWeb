@@ -18,21 +18,25 @@ import {
   useToast,
 } from "@chakra-ui/react";
 //import swal from "sweetalert";
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { login } from "../redux/AuthReducer/action";
 //import { LOGIN_S } from "../redux/AuthReducer/actionType";
 import { ViewIcon } from "@chakra-ui/icons";
 import logo from "../img/icon.png";
 import { auth } from "../Firebase/config";
-import { setToast, checkLoginForm } from "../components/Other/CheckProperty";
-const Login = () => {
+const ResetPassword = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const Params = useSearchParams();
   const [isChecked, setisChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,27 +49,13 @@ const Login = () => {
   };
 
   const loginHandler = () => {
-    var isEmpty = checkLoginForm({ email, password });
-    if (!isEmpty.status) {
-      return setToast(toast, isEmpty.message, "error");
-    } else {
-      const params = {
-        email,
-        password,
-      };
-      dispatch(login(params, toast)).then((res) => {
-        if (res.type === "LOGIN_S") navigate(pathRoute, { replace: true });
-      });
-    }
-  };
-
-  const triggerResetEmail = async () => {
-    if (email.trim() === "")
-      return setToast(toast, "Please enter a valid email", "error");
-    await auth.sendPasswordResetEmail(email).then((res) => {
-      setToast(toast, "Password reset email sent successfully");
+    const searchParams = new URLSearchParams(location.search);
+    var oobCode = searchParams.get("oobCode");
+    auth.confirmPasswordReset(oobCode, password).then((res) => {
+      navigate("/login", { replace: true });
     });
   };
+
   return (
     <>
       {/* <Navbar /> <br /> */}
@@ -91,21 +81,21 @@ const Login = () => {
               textTransform={"uppercase"}
               color={"#fff"}
             >
-              Sign in to your account
+              Reset Your Password
             </Heading>
           </Stack>
           <Box rounded={"lg"} boxShadow={"lg"} p={8} bg={"#fff"}>
             <Stack spacing={4}>
-              <FormControl id="username" isRequired>
+              {/* <FormControl id="username" isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              </FormControl>
+              </FormControl> */}
               <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>New Password</FormLabel>
                 <InputGroup>
                   <Input
                     type={eye ? "text" : "password"}
@@ -120,21 +110,8 @@ const Login = () => {
                 </InputGroup>
               </FormControl>
               <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                  justify={"space-between"}
-                >
-                  <Checkbox onChange={(e) => setisChecked(e.target.checked)}>
-                    Accept Terms & Conditions
-                  </Checkbox>
-                  <Link onClick={() => triggerResetEmail()} color={"blue.400"}>
-                    Forgot password?
-                  </Link>
-                </Stack>
                 <Button
                   bg={"black"}
-                  disabled={!isChecked}
                   color={"whitesmoke"}
                   _hover={{
                     bg: "none",
@@ -143,7 +120,7 @@ const Login = () => {
                   }}
                   onClick={loginHandler}
                 >
-                  {loading ? <Spinner /> : "Sign in"}
+                  {loading ? <Spinner /> : "Reset Password"}
                 </Button>
               </Stack>
               <Stack pt={6}>
@@ -162,7 +139,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;
 
 // swal({
 //   text: "Login Success",
