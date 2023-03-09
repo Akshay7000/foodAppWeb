@@ -135,7 +135,7 @@ function ContectUs(props) {
                   color={!colorMode === "dark" ? "white" : "black"}
                 >
                   <a href="mailto: AVYAYAHEALTH@GMAIL.COM">
-                    avyayahealth@email.com
+                    avyayahealth@gmail.com
                   </a>
                 </Text>
               </Box>

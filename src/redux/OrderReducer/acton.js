@@ -27,7 +27,6 @@ const getOrders = (payload) => async (dispatch) => {
     .where("userId", "==", payload)
     .get()
     .then((res) => {
-      console.log("🚀 ~ file: acton.js:31 ~ .then ~ res:", res);
       var all = res?.docs?.map((item) => item.data());
       var sortedData = all?.sort(function (a, b) {
         return new Date(b.createdDate) - new Date(a.createdDate);

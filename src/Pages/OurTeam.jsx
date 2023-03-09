@@ -69,7 +69,7 @@ function OurTeam() {
                   <Text textTransform={"capitalize"} fontWeight={"bold"}>
                     {item?.name}
                   </Text>
-                  <Text textTransform={"capitalize"}>{item?.position}</Text>
+                  <Text textTransform={"capitalize"}>{item?.post}</Text>
                 </Box>
               ))}
             </Box>

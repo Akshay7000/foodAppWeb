@@ -6,6 +6,7 @@ const WebSettings = firestore.collection("webSetting");
 const customers = firestore.collection("customers");
 const subscribeProducts = firestore.collection("subscribeProduct");
 const orders = firestore.collection("orders");
+const Attendance = firestore.collection("Attendance");
 
 export {
   Products,
@@ -14,4 +15,5 @@ export {
   customers,
   subscribeProducts,
   orders,
+  Attendance,
 };

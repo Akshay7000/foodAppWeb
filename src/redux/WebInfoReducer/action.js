@@ -37,7 +37,7 @@ const getTeamData = (params) => async (dispatch) => {
 
       dispatch({
         type: types.GET_TEAM_S,
-        payload: { title: title?.title, members: allmembers },
+        payload: { title: title?.title, members: allmembers?.reverse() },
       });
     })
     .then((err) => {

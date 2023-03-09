@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setToast } from "../../components/Other/CheckProperty";
-import { customers } from "../../Firebase/Collection";
+import { Attendance, customers } from "../../Firebase/Collection";
 import { auth } from "../../Firebase/config";
 import { getLocalData, saveLocalData } from "../../utils/localStorage";
 import * as types from "./actionType";
@@ -72,6 +72,33 @@ const login = (payload, toast) => async (dispatch) => {
     });
 };
 
+const GET_Attendance = async (payload) => {
+  const Months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return await Attendance.doc(payload)
+    .get()
+    .then((res) => {
+      var thisMonth = res?.data()[`${Months[new Date().getMonth()]}`];
+      var NoOfDays = thisMonth.filter((ele) => ele.delivered);
+      return NoOfDays?.length;
+    })
+    .catch((e) => {
+      console.log("🚀 ~ file: action.js:85 ~ Attendance ~ e:", e);
+    });
+};
 const profile = (payload) => async (dispatch) => {
   dispatch({ type: types.PROFILE_R });
   return await customers
@@ -103,4 +130,4 @@ const profileUpdate = (payload) => async (dispatch) => {
     });
 };
 
-export { login, register, profile, profileUpdate };
+export { login, register, profile, profileUpdate, GET_Attendance };

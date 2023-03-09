@@ -19,10 +19,11 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { profileUpdate } from "../../redux/AuthReducer/action";
+import { getLocalData } from "../../utils/localStorage";
 import AlertCustom from "../Alert/Alert";
 import {
   checkMobile,
@@ -30,8 +31,11 @@ import {
   checkSubscribeFormEmpty,
   setToast,
 } from "../Other/CheckProperty";
+import { profile, GET_Attendance } from "../../redux/AuthReducer/action";
 function SubscribeModal() {
+  const [currentSubProd, setCurrentSubProd] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [NoOfDays, setNoOfDays] = useState(0);
   const toast = useToast();
   const dispatch = useDispatch();
   const [isChecked, setisChecked] = useState(false);
@@ -40,24 +44,43 @@ function SubscribeModal() {
   const subscribeProducts = useSelector(
     (store) => store.pagesReducer.subscribeProducts
   );
-  const profile = useSelector((store) => store?.AuthReducer?.profileData);
+
+  const profilei = useSelector((store) => store?.AuthReducer?.profileData);
   const [FormData, setFormData] = useState({
-    firstName: profile?.firstName,
-    lastName: profile?.lastName,
-    mobile: profile?.mobile,
-    addressLine1: profile?.address?.addressLine1,
-    addressLine2: profile?.address?.addressLine2,
-    locality: profile?.address?.locality,
-    pinCode: profile?.address?.pinCode,
-    state: profile?.address?.state,
-    subscribedID: profile?.subscribedID,
+    firstName: profilei?.firstName,
+    lastName: profilei?.lastName,
+    mobile: profilei?.mobile,
+    addressLine1: profilei?.address?.addressLine1,
+    addressLine2: profilei?.address?.addressLine2,
+    locality: profilei?.address?.locality,
+    pinCode: profilei?.address?.pinCode,
+    state: profilei?.address?.state,
+    subscribedID: profilei?.subscribedID,
   });
+  const token = getLocalData("token"); //different approaches for getting local storage
+  const email = getLocalData("userInfo");
+  const payload = {
+    email: email,
+    token,
+  };
   const [AlerState, setAlerState] = useState(false);
   const navigate = useNavigate();
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
+    if (!profile?.isSubscribed) {
+      var noOfDays = GET_Attendance(token.uid).then((res) => {
+        setNoOfDays(res);
+      });
+
+      setNoOfDays(noOfDays);
+      var data = subscribeProducts.find(
+        (ele) => ele.id === profilei.subscribedID
+      );
+
+      setCurrentSubProd(data);
+    }
     if (auth) {
       {
-        !profile.isSubscribed ? onOpen() : setAlerState(true);
+        !profilei.isSubscribed ? onOpen() : setAlerState(true);
       }
     } else {
       setToast(toast, "Sign in to subscribe", "info");
@@ -115,22 +138,35 @@ function SubscribeModal() {
       dispatch(profileUpdate(data));
       onClose();
       setToast(toast, "Successfully Subscribed", "success");
+      dispatch(profile(payload));
     } else {
       console.log("else", FormData);
     }
   };
+  // useEffect(() => {
+  //   {
+  //     token?.uid && dispatch(GET_Attendance(token.uid));
+  //   }
+  // }, []);
 
   return (
     <div>
       <AlertCustom
+        MainBtn={""}
         OnClose={() => setAlerState(false)}
         onOK={() => {
           setAlerState(false);
           onOpen();
         }}
         showAlert={AlerState}
-        Title={"Already Subscribed"}
-        Description={"Would you like to update your subscribed product?"}
+        Title={
+          "Already Subscribed to " +
+          " " +
+          currentSubProd?.productName +
+          " " +
+          currentSubProd?.weight
+        }
+        Description={"Total ₹" + " " + NoOfDays * currentSubProd?.price}
       />
       <Box mt="3rem">
         <Button

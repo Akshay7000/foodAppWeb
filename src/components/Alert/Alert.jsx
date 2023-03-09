@@ -39,32 +39,34 @@ const AlertCustom = ({
               {Title}
             </AlertTitle>
             <AlertDescription maxWidth="sm">{Description}</AlertDescription>
-            <ButtonGroup variant="solid" spacing="6" mt={"5"}>
-              <Button
-                onClick={onOK}
-                bg={"black"}
-                color="whitesmoke"
-                _hover={{
-                  background: "none",
-                  color: "teal",
-                  border: "1px solid black",
-                }}
-              >
-                {MainBtn}
-              </Button>
-              <Button
-                onClick={OnClose}
-                bg={"#e08f38"}
-                color="whitesmoke"
-                _hover={{
-                  background: "none",
-                  color: "teal",
-                  border: "1px solid black",
-                }}
-              >
-                Cancel
-              </Button>
-            </ButtonGroup>
+            {MainBtn !== "" && (
+              <ButtonGroup variant="solid" spacing="6" mt={"5"}>
+                <Button
+                  onClick={onOK}
+                  bg={"black"}
+                  color="whitesmoke"
+                  _hover={{
+                    background: "none",
+                    color: "teal",
+                    border: "1px solid black",
+                  }}
+                >
+                  {MainBtn}
+                </Button>
+                <Button
+                  onClick={OnClose}
+                  bg={"#e08f38"}
+                  color="whitesmoke"
+                  _hover={{
+                    background: "none",
+                    color: "teal",
+                    border: "1px solid black",
+                  }}
+                >
+                  Cancel
+                </Button>
+              </ButtonGroup>
+            )}
           </Alert>
         </ModalContent>
       </Modal>
