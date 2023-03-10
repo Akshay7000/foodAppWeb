@@ -40,6 +40,7 @@ const SomethingNew = () => {
           {isVIDEOon ? (
             <Flex justify={"center"} bg={"#000"} h={"100vh"}>
               <video
+                playsinline
                 ref={vidRef}
                 id="myVideo"
                 name="media"
