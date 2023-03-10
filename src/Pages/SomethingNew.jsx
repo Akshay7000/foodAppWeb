@@ -23,8 +23,8 @@ const SomethingNew = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      vidRef?.current?.play();
-    }, 1000);
+      handleVideoEnded();
+    }, 35000);
   }, []);
 
   const handleVideoEnded = () => {
@@ -38,7 +38,7 @@ const SomethingNew = () => {
       ) : (
         <>
           {isVIDEOon ? (
-            <Flex justify={"center"} bg={"#000"}>
+            <Flex justify={"center"} bg={"#000"} h={"100vh"}>
               <video
                 ref={vidRef}
                 id="myVideo"

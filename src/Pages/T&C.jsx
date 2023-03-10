@@ -143,8 +143,8 @@ function TermsCondition() {
                   graphics, utility models, designs, know-how, trade secrets and
                   inventions (patent pending), goodwill, source code, meta tags,
                   databases, text, content, icons, and hyperlinks, are protected
-                  by copyrights, trademarks are owned and controlled by “Mr.
-                  Milk” unless otherwise noted. You agree to not use, copy,
+                  by copyrights, trademarks are owned and controlled by “AVYAYA
+                  HEALTH” unless otherwise noted. You agree to not use, copy,
                   reproduce, republish, or distribute any content from the
                   website in any way directly or indirectly without prior
                   written authorization from “AVYAYA HEALTH REWINE INDIA LLP”.

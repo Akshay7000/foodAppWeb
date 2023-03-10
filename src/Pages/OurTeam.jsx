@@ -29,7 +29,13 @@ function OurTeam() {
         {loading ? (
           <Loading />
         ) : (
-          <Box width={"70%"}>
+          <Box
+            width={"70%"}
+            display="flex"
+            flexDir={"column"}
+            justifyContent="center"
+            alignItems={"center"}
+          >
             <Text
               textAlign={"start"}
               fontSize={isLargerThan ? "6xl" : "4xl"}
@@ -37,15 +43,38 @@ function OurTeam() {
             >
               Who we are?
             </Text>
-            <Text
+            {/* <Text
               textAlign={"start"}
               fontSize="sl"
               fontWeight={"hairline"}
               width={isLargerThan ? "40%" : "100%"}
             >
               {team.title}
-            </Text>
+            </Text> */}
+            <Box width={isLargerThan && "20%"} mx={"5"} my={"4"}>
+              <Box height={"280px"}>
+                <Image
+                  borderRadius={"15px"}
+                  src={team?.members[0]?.image}
+                  width={"100%"}
+                  height={"100%"}
+                  objectFit="cover"
+                  fallbacksrc="https://via.placeholder.com/150"
+                />
+              </Box>
 
+              <Text textTransform={"capitalize"} fontWeight={"bold"}>
+                {team?.members[0]?.name}
+              </Text>
+              <Text textTransform={"capitalize"}>{team?.members[0]?.post}</Text>
+            </Box>
+            <Text
+              textTransform={"capitalize"}
+              width={"80%"}
+              fontWeight={"bold"}
+            >
+              {team?.title}
+            </Text>
             <Box
               my={"9"}
               display={"flex"}
@@ -54,23 +83,27 @@ function OurTeam() {
               justifyContent={"center"}
             >
               {team?.members?.map((item) => (
-                <Box width={isLargerThan && "20%"} mx={"5"} my={"4"}>
-                  <Box height={"280px"}>
-                    <Image
-                      borderRadius={"15px"}
-                      src={item?.image}
-                      width={"100%"}
-                      height={"100%"}
-                      objectFit="cover"
-                      fallbacksrc="https://via.placeholder.com/150"
-                    />
-                  </Box>
+                <>
+                  {item?.post !== "Founder" && (
+                    <Box mx={"5"} my={"4"}>
+                      <Box height={"280px"}>
+                        <Image
+                          borderRadius={"15px"}
+                          src={item?.image}
+                          width={"100%"}
+                          height={"100%"}
+                          objectFit="cover"
+                          fallbacksrc="https://via.placeholder.com/150"
+                        />
+                      </Box>
 
-                  <Text textTransform={"capitalize"} fontWeight={"bold"}>
-                    {item?.name}
-                  </Text>
-                  <Text textTransform={"capitalize"}>{item?.post}</Text>
-                </Box>
+                      <Text textTransform={"capitalize"} fontWeight={"bold"}>
+                        {item?.name}
+                      </Text>
+                      <Text textTransform={"capitalize"}>{item?.post}</Text>
+                    </Box>
+                  )}
+                </>
               ))}
             </Box>
           </Box>

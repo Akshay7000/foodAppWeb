@@ -15,7 +15,7 @@ import cow from "../img/cow.png";
 import FD from "../img/fd1.png";
 import Hyg from "../img/hyg.png";
 import milkSplash0 from "../img/milk.jpg";
-import milkBottels from "../img/milkBottels.jpg";
+import milkBottels from "../img/PHOTO-2023-03-10-15-51-16.jpg";
 
 import NA from "../img/nA.png";
 import { getSubscribepProducts } from "../redux/PagesReducer/action";
@@ -68,7 +68,11 @@ const Home = () => {
               alignItems={"center"}
               mx={"5"}
             >
-              <Box width={"30%"} m="auto">
+              <Box
+                width={isLargerThan ? "30%" : "70%"}
+                m="auto"
+                marginBottom={!isLargerThan && "12%"}
+              >
                 <Image src={milkBottels} borderRadius={"2xl"} />
               </Box>
               <Box

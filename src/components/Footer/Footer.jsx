@@ -75,7 +75,8 @@ const Footer = () => {
           {isSmallerThan ? (
             <Flex flexDirection={"column"}>
               <Heading>Support</Heading>
-              <Text>Order Tracker</Text>
+
+              <NavLink to={"/orders"}>Order Tracker</NavLink>
               <NavLink to={"/privacy"}>Privacy Policy</NavLink>
               <NavLink to={"/terms"}>Terms & Conditions</NavLink>
               <NavLink to={"/return"}>Refund Policy</NavLink>
