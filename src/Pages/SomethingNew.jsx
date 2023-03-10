@@ -24,7 +24,7 @@ const SomethingNew = () => {
   useEffect(() => {
     setTimeout(() => {
       handleVideoEnded();
-    }, 35000);
+    }, 30500);
   }, []);
 
   const handleVideoEnded = () => {
@@ -39,7 +39,17 @@ const SomethingNew = () => {
         <>
           {isVIDEOon ? (
             <Flex justify={"center"} bg={"#000"} h={"100vh"}>
-              <video
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `<video  key=${new Date().getTime()} /className="app__backgroundVideo" autoplay loop muted playsinline>
+      <source src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49" type="video/mp4" />
+      Your browser does not support the video tag.
+</video>`,
+                }}
+                ref={vidRef}
+              />
+
+              {/* <video
                 playsinline
                 ref={vidRef}
                 id="myVideo"
@@ -51,7 +61,7 @@ const SomethingNew = () => {
                   src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49"
                   type="video/mp4"
                 />
-              </video>
+              </video> */}
             </Flex>
           ) : (
             <Flex my={"20"}>
