@@ -181,6 +181,7 @@ const Navbar = () => {
                 </Text>
               </NavLink>
               <NavLink
+                id="something123"
                 style={({ isActive }) => (isActive ? activeStyle : baseStyle)}
                 to="/something-new"
               >

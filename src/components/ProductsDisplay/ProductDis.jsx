@@ -74,7 +74,13 @@ const ProductDis = ({ item, type }) => {
           mx={"4"}
           my={"2"}
         >
-          <Text fontSize={"md"} maxW={"70%"}>
+          <Text
+            fontSize={"md"}
+            maxW={"70%"}
+            whiteSpace="nowrap"
+            overflow="hidden"
+            textOverflow={"ellipsis"}
+          >
             {productName ? productName : "-"}
           </Text>
 

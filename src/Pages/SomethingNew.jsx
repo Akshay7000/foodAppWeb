@@ -14,17 +14,18 @@ const SomethingNew = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 768px)");
 
   const featured = useSelector((store) => store.pagesReducer.featured);
-  const [isVIDEOon, setisVIDEOon] = useState(true);
+  const [isVIDEOon, setisVIDEOon] = useState(false);
   useEffect(() => {
     if (featured?.length === 0) {
       dispatch(getFeaturedProducts());
     }
   }, [dispatch, featured?.length]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setisVIDEOon(true);
     setTimeout(() => {
-      handleVideoEnded();
-    }, 35000);
+      vidRef?.current?.play();
+    }, 1000);
   }, []);
 
   const handleVideoEnded = () => {
@@ -38,31 +39,38 @@ const SomethingNew = () => {
       ) : (
         <>
           {isVIDEOon ? (
-            <Flex justify={"center"} bg={"#000"} h={"100vh"}>
-              {/* <div
-                dangerouslySetInnerHTML={{
-                  __html: `<video  key=${new Date().getTime()} /className="app__backgroundVideo" autoplay loop muted playsinline>
-      <source src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49" type="video/mp4" />
-      Your browser does not support the video tag.
-</video>`,
-                }}
-                ref={vidRef}
-              /> */}
-
-              <video
-                playsinline
-                ref={vidRef}
-                id="myVideo"
-                name="media"
-                preLoad="auto"
-                key={new Date().getTime()}
-                onEnded={handleVideoEnded}
-              >
-                <source
-                  src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49"
-                  type="video/mp4"
-                />
-              </video>
+            <Flex
+              justify={"center"}
+              bg={"#000"}
+              h={"100vh"}
+              onClick={() => vidRef?.current?.play()}
+            >
+              {isVIDEOon && (
+                <video
+                  playsInline
+                  ref={vidRef}
+                  id="myVideo"
+                  name="media"
+                  preload="auto"
+                  // muted
+                  // key={new Date().getTime()}
+                  onEnded={handleVideoEnded}
+                >
+                  <source
+                    src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49"
+                    type="video/mp4"
+                  />
+                </video>
+                // <div
+                //   dangerouslySetInnerHTML={{
+                //     __html: `<video  key=${new Date().getTime()}  onEnded={handleVideoEnded} /className="app__backgroundVideo" autoplay   playsinline>
+                //       <source src="https://firebasestorage.googleapis.com/v0/b/avyayahealth-9f67d.appspot.com/o/team%2FWhatsApp%20Video%202023-03-06%20at%202.44.39%20PM.mp4?alt=media&token=408522bb-bbfd-4232-825d-4d451e542b49" type="video/mp4" />
+                //       Your browser does not support the video tag.
+                // </video>`,
+                //   }}
+                //   ref={vidRef}
+                // />
+              )}
             </Flex>
           ) : (
             <Flex my={"20"}>
