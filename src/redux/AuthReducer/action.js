@@ -93,7 +93,7 @@ const GET_Attendance = async (payload) => {
     .then((res) => {
       var thisMonth = res?.data()[`${Months[new Date().getMonth()]}`];
       var NoOfDays = thisMonth.filter((ele) => ele.delivered);
-      return NoOfDays?.length;
+      return thisMonth;
     })
     .catch((e) => {
       console.log("🚀 ~ file: action.js:85 ~ Attendance ~ e:", e);

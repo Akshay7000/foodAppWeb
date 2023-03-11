@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import "react-calendar/dist/Calendar.css";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
 import Navbar from "../components/Navbar/Navbar";
@@ -15,9 +16,8 @@ import cow from "../img/cow.png";
 import FD from "../img/fd1.png";
 import Hyg from "../img/hyg.png";
 import milkSplash0 from "../img/milk.jpg";
-import milkBottels from "../img/PHOTO-2023-03-10-15-51-16.jpg";
-
 import NA from "../img/nA.png";
+import milkBottels from "../img/PHOTO-2023-03-10-15-51-16.jpg";
 import { getSubscribepProducts } from "../redux/PagesReducer/action";
 const Home = () => {
   const loading = useSelector((store) => store.pagesReducer.isLoading);

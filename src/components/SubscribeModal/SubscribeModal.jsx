@@ -32,6 +32,7 @@ import {
   setToast,
 } from "../Other/CheckProperty";
 import { profile, GET_Attendance } from "../../redux/AuthReducer/action";
+import Calendar from "../Calendar/Calendar";
 function SubscribeModal() {
   const [currentSubProd, setCurrentSubProd] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -68,6 +69,7 @@ function SubscribeModal() {
   const handleSubscribe = async () => {
     if (!profile?.isSubscribed) {
       var noOfDays = GET_Attendance(token.uid).then((res) => {
+        console.log("🚀 ~ file: SubscribeModal.jsx:72 ~ noOfDays ~ res:", res);
         setNoOfDays(res);
       });
 
@@ -79,9 +81,7 @@ function SubscribeModal() {
       setCurrentSubProd(data);
     }
     if (auth) {
-      {
-        !profilei.isSubscribed ? onOpen() : setAlerState(true);
-      }
+      onOpen();
     } else {
       setToast(toast, "Sign in to subscribe", "info");
       navigate("login");
@@ -151,7 +151,7 @@ function SubscribeModal() {
 
   return (
     <div>
-      <AlertCustom
+      {/* <AlertCustom
         MainBtn={""}
         OnClose={() => setAlerState(false)}
         onOK={() => {
@@ -167,7 +167,8 @@ function SubscribeModal() {
           currentSubProd?.weight
         }
         Description={"Total ₹" + " " + NoOfDays * currentSubProd?.price}
-      />
+      /> */}
+
       <Box mt="3rem">
         <Button
           width={["80%", "80%", "70%", "70%"]}
@@ -188,139 +189,151 @@ function SubscribeModal() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent top={10}>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Box m="auto" min-h="100vh">
-              <FormControl p="1rem">
-                <Heading align={"left"} my={"5"}>
-                  Subscribe<span style={{ color: "red" }}>*</span>
-                </Heading>
-                <HStack spacing={"2"}>
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, firstName: e.target.value })
-                    }
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name*"
-                    value={FormData?.firstName}
-                  />
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, lastName: e.target.value })
-                    }
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name*"
-                    value={FormData?.lastName}
-                  />
-                </HStack>
-                <VStack spacing={"10"} my={"10"}>
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, addressLine1: e.target.value })
-                    }
-                    type="text"
-                    name="addressLine1"
-                    placeholder="Address Line 1*"
-                    value={FormData?.addressLine1}
-                  />
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, addressLine2: e.target.value })
-                    }
-                    type="text"
-                    name="addressLine2"
-                    placeholder="Address Line 2"
-                    value={FormData?.addressLine2}
-                  />
-                </VStack>
-                <HStack my={"8"}>
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, locality: e.target.value })
-                    }
-                    type="text"
-                    name="locality"
-                    placeholder="Town/City*"
-                    value={FormData?.locality}
-                  />
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, pinCode: e.target.value })
-                    }
-                    type="number"
-                    name="pinCode"
-                    placeholder="Pin Code*"
-                    value={FormData?.pinCode}
-                  />
-                </HStack>
-                <HStack>
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, state: e.target.value })
-                    }
-                    type="text"
-                    name="state"
-                    placeholder="State/Territory*"
-                    value={FormData?.state}
-                  />
-                  <Input
-                    onChange={(e) =>
-                      setFormData({ ...FormData, mobile: e.target.value })
-                    }
-                    type="number"
-                    name="mobile"
-                    placeholder="Mobile*"
-                    value={FormData?.mobile}
-                  />
-                </HStack>
-                <Stack my={"8"}>
-                  <Select
-                    placeholder="Select Product*"
-                    size="md"
-                    defaultValue={FormData?.subscribedID}
-                    onChange={(e) => {
-                      setFormData({
-                        ...FormData,
-                        subscribedID: e.target.value,
-                      });
+            <Box m="auto" min-h="100vh" zIndex={9999}>
+              {!profile?.isSubscribed ? (
+                <Box p="1rem" my={"5"}>
+                  <Calendar data={NoOfDays} currentProduct={currentSubProd} />
+                </Box>
+              ) : (
+                <FormControl p="1rem">
+                  <Heading align={"left"} my={"5"}>
+                    Subscribe<span style={{ color: "red" }}>*</span>
+                  </Heading>
+                  <HStack spacing={"2"}>
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, firstName: e.target.value })
+                      }
+                      type="text"
+                      name="firstName"
+                      placeholder="First Name*"
+                      value={FormData?.firstName}
+                    />
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, lastName: e.target.value })
+                      }
+                      type="text"
+                      name="lastName"
+                      placeholder="Last Name*"
+                      value={FormData?.lastName}
+                    />
+                  </HStack>
+                  <VStack spacing={"10"} my={"10"}>
+                    <Input
+                      onChange={(e) =>
+                        setFormData({
+                          ...FormData,
+                          addressLine1: e.target.value,
+                        })
+                      }
+                      type="text"
+                      name="addressLine1"
+                      placeholder="Address Line 1*"
+                      value={FormData?.addressLine1}
+                    />
+                    <Input
+                      onChange={(e) =>
+                        setFormData({
+                          ...FormData,
+                          addressLine2: e.target.value,
+                        })
+                      }
+                      type="text"
+                      name="addressLine2"
+                      placeholder="Address Line 2"
+                      value={FormData?.addressLine2}
+                    />
+                  </VStack>
+                  <HStack my={"8"}>
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, locality: e.target.value })
+                      }
+                      type="text"
+                      name="locality"
+                      placeholder="Town/City*"
+                      value={FormData?.locality}
+                    />
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, pinCode: e.target.value })
+                      }
+                      type="number"
+                      name="pinCode"
+                      placeholder="Pin Code*"
+                      value={FormData?.pinCode}
+                    />
+                  </HStack>
+                  <HStack>
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, state: e.target.value })
+                      }
+                      type="text"
+                      name="state"
+                      placeholder="State/Territory*"
+                      value={FormData?.state}
+                    />
+                    <Input
+                      onChange={(e) =>
+                        setFormData({ ...FormData, mobile: e.target.value })
+                      }
+                      type="number"
+                      name="mobile"
+                      placeholder="Mobile*"
+                      value={FormData?.mobile}
+                    />
+                  </HStack>
+                  <Stack my={"8"}>
+                    <Select
+                      placeholder="Select Product*"
+                      size="md"
+                      defaultValue={FormData?.subscribedID}
+                      onChange={(e) => {
+                        setFormData({
+                          ...FormData,
+                          subscribedID: e.target.value,
+                        });
+                      }}
+                    >
+                      {subscribeProducts?.map((item) => {
+                        return (
+                          <option value={item?.id}>
+                            {item?.productName + " - " + item.weight}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </Stack>
+                  <Divider />
+                  <Checkbox onChange={(e) => setisChecked(e.target.checked)}>
+                    Accept Terms & Conditions
+                  </Checkbox>
+                  <Button
+                    onClick={FormSubmit}
+                    mt="2rem"
+                    width={["100%", "100%"]}
+                    // my={"4"}
+                    disabled={!isChecked}
+                    bg={isLargerThan ? "black" : "grey"}
+                    color="whitesmoke"
+                    p="1.5rem 2rem"
+                    border={"1px solid beige"}
+                    _hover={{
+                      background: "none",
+                      color: "teal",
+                      border: "1px solid black",
                     }}
+                    type="submit"
                   >
-                    {subscribeProducts?.map((item) => {
-                      return (
-                        <option value={item?.id}>
-                          {item?.productName + " - " + item.weight}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </Stack>
-                <Divider />
-                <Checkbox onChange={(e) => setisChecked(e.target.checked)}>
-                  Accept Terms & Conditions
-                </Checkbox>
-                <Button
-                  onClick={FormSubmit}
-                  mt="2rem"
-                  width={["100%", "100%"]}
-                  // my={"4"}
-                  disabled={!isChecked}
-                  bg={isLargerThan ? "black" : "grey"}
-                  color="whitesmoke"
-                  p="1.5rem 2rem"
-                  border={"1px solid beige"}
-                  _hover={{
-                    background: "none",
-                    color: "teal",
-                    border: "1px solid black",
-                  }}
-                  type="submit"
-                >
-                  SUBSCRIBE
-                </Button>
-              </FormControl>
+                    SUBSCRIBE
+                  </Button>
+                </FormControl>
+              )}
             </Box>
           </ModalBody>
         </ModalContent>

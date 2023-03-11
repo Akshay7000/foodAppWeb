@@ -51,61 +51,71 @@ function OurTeam() {
             >
               {team.title}
             </Text> */}
-            <Box width={isLargerThan && "20%"} mx={"5"} my={"4"}>
-              <Box height={"280px"}>
-                <Image
-                  borderRadius={"15px"}
-                  src={team?.members[0]?.image}
-                  width={"100%"}
-                  height={"100%"}
-                  objectFit="cover"
-                  fallbacksrc="https://via.placeholder.com/150"
-                />
-              </Box>
 
-              <Text textTransform={"capitalize"} fontWeight={"bold"}>
-                {team?.members[0]?.name}
-              </Text>
-              <Text textTransform={"capitalize"}>{team?.members[0]?.post}</Text>
-            </Box>
-            <Text
-              textTransform={"capitalize"}
-              width={"80%"}
-              fontWeight={"bold"}
-            >
-              {team?.title}
-            </Text>
-            <Box
-              my={"9"}
-              display={"flex"}
-              flexDirection={isLargerThan ? "row" : "column"}
-              flexWrap="wrap"
-              justifyContent={"center"}
-            >
-              {team?.members?.map((item) => (
-                <>
-                  {item?.post !== "Founder" && (
-                    <Box mx={"5"} my={"4"}>
-                      <Box height={"280px"}>
-                        <Image
-                          borderRadius={"15px"}
-                          src={item?.image}
-                          width={"100%"}
-                          height={"100%"}
-                          objectFit="cover"
-                          fallbacksrc="https://via.placeholder.com/150"
-                        />
-                      </Box>
+            {team?.members?.length > 0 && (
+              <>
+                <Box width={isLargerThan && "20%"} mx={"5"} my={"4"}>
+                  <Box height={"280px"}>
+                    <Image
+                      borderRadius={"15px"}
+                      src={team?.members[0]?.image}
+                      width={"100%"}
+                      height={"100%"}
+                      objectFit="cover"
+                      fallbacksrc="https://via.placeholder.com/150"
+                    />
+                  </Box>
 
-                      <Text textTransform={"capitalize"} fontWeight={"bold"}>
-                        {item?.name}
-                      </Text>
-                      <Text textTransform={"capitalize"}>{item?.post}</Text>
-                    </Box>
-                  )}
-                </>
-              ))}
-            </Box>
+                  <Text textTransform={"capitalize"} fontWeight={"bold"}>
+                    {team?.members[0]?.name}
+                  </Text>
+                  <Text textTransform={"capitalize"}>
+                    {team?.members[0]?.post}
+                  </Text>
+                </Box>
+                <Text
+                  textTransform={"capitalize"}
+                  width={"70%"}
+                  fontWeight={"bold"}
+                >
+                  {team?.title}
+                </Text>
+                <Box
+                  my={"9"}
+                  display={"flex"}
+                  flexDirection={isLargerThan ? "row" : "column"}
+                  flexWrap="wrap"
+                  justifyContent={"center"}
+                >
+                  {team?.members?.map((item) => (
+                    <>
+                      {item?.post !== "Founder" && (
+                        <Box mx={"5"} my={"4"}>
+                          <Box height={"280px"}>
+                            <Image
+                              borderRadius={"15px"}
+                              src={item?.image}
+                              width={"100%"}
+                              height={"100%"}
+                              objectFit="cover"
+                              fallbacksrc="https://via.placeholder.com/150"
+                            />
+                          </Box>
+
+                          <Text
+                            textTransform={"capitalize"}
+                            fontWeight={"bold"}
+                          >
+                            {item?.name}
+                          </Text>
+                          <Text textTransform={"capitalize"}>{item?.post}</Text>
+                        </Box>
+                      )}
+                    </>
+                  ))}
+                </Box>
+              </>
+            )}
           </Box>
         )}
       </Flex>
