@@ -91,9 +91,13 @@ const GET_Attendance = async (payload) => {
   return await Attendance.doc(payload)
     .get()
     .then((res) => {
-      var thisMonth = res?.data()[`${Months[new Date().getMonth()]}`];
-      var NoOfDays = thisMonth.filter((ele) => ele.delivered);
-      return thisMonth;
+      try {
+        var thisMonth = res?.data()[`${Months[new Date().getMonth()]}`];
+
+        return thisMonth;
+      } catch (error) {
+        return [];
+      }
     })
     .catch((e) => {
       console.log("🚀 ~ file: action.js:85 ~ Attendance ~ e:", e);

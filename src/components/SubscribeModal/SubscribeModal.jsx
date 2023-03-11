@@ -67,19 +67,6 @@ function SubscribeModal() {
   const [AlerState, setAlerState] = useState(false);
   const navigate = useNavigate();
   const handleSubscribe = async () => {
-    if (!profile?.isSubscribed) {
-      var noOfDays = GET_Attendance(token.uid).then((res) => {
-        console.log("🚀 ~ file: SubscribeModal.jsx:72 ~ noOfDays ~ res:", res);
-        setNoOfDays(res);
-      });
-
-      setNoOfDays(noOfDays);
-      var data = subscribeProducts.find(
-        (ele) => ele.id === profilei.subscribedID
-      );
-
-      setCurrentSubProd(data);
-    }
     if (auth) {
       onOpen();
     } else {
@@ -139,6 +126,7 @@ function SubscribeModal() {
       onClose();
       setToast(toast, "Successfully Subscribed", "success");
       dispatch(profile(payload));
+      // window.location.reload();
     } else {
       console.log("else", FormData);
     }
@@ -193,7 +181,7 @@ function SubscribeModal() {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Box m="auto" min-h="100vh" zIndex={9999}>
-              {!profile?.isSubscribed ? (
+              {profilei?.isSubscribed ? (
                 <Box p="1rem" my={"5"}>
                   <Calendar data={NoOfDays} currentProduct={currentSubProd} />
                 </Box>

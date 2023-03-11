@@ -1,15 +1,33 @@
 import { Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { GET_Attendance } from "../../redux/AuthReducer/action";
+import { getLocalData } from "../../utils/localStorage";
 import "./cal.css";
-export default function Calendar({ data, currentProduct }) {
+export default function Calendar() {
   const [CalendarArray, setCalendarArray] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState({});
+  const subscribeProducts = useSelector(
+    (store) => store.pagesReducer.subscribeProducts
+  );
+  const token = getLocalData("token"); //different approaches for getting local storage
+  const email = getLocalData("userInfo");
+  const payload = {
+    email: email,
+    token,
+  };
+  const profile = useSelector((store) => store?.AuthReducer?.profileData);
   useEffect(() => {
-    if (data?.length > 0) {
-      ReduceArray();
-    }
-  }, [data]);
+    var noOfDays = GET_Attendance(token.uid).then((res) => {
+      ReduceArray(res);
+    });
 
-  const ReduceArray = () => {
+    var data = subscribeProducts.find((ele) => ele.id === profile.subscribedID);
+    console.log("🚀 ~ file: Calendar.js:26 ~ useEffect ~ data:", data);
+    setCurrentProduct(data);
+  }, []);
+
+  const ReduceArray = (data) => {
     const perChunk = 7;
     var inputArray = data;
     var noOfDays = data?.filter((ele) => ele.delivered);
@@ -30,16 +48,16 @@ export default function Calendar({ data, currentProduct }) {
   };
 
   return (
-    <div class="container">
-      {data.length > 0 ? (
+    <div className="container">
+      {CalendarArray?.result?.length > 0 ? (
         <>
-          <div class="calendar">
-            <div class="front">
-              <div class="current-month">
-                <div class="weeks">
+          <div className="calendar">
+            <div className="front">
+              <div className="current-month">
+                <div className="weeks">
                   {CalendarArray?.result?.map((date, index) => {
                     return (
-                      <div class="" key={date}>
+                      <div className="" key={date}>
                         {date?.map((i) => (
                           <span className={i?.delivered ? "active" : ""}>
                             {i?.date?.toLocaleString("en-US", {
@@ -68,9 +86,13 @@ export default function Calendar({ data, currentProduct }) {
           </Flex>
         </>
       ) : (
-        <>
+        <Flex justify={"center"} flexDir={"column"} alignItems="center">
+          <Text fontSize={"2xl"}>
+            Already Subscribed to {currentProduct?.productName + " "}
+            {currentProduct?.weight}
+          </Text>
           <Text fontWeight={"bold"}>Data not found for the current month</Text>
-        </>
+        </Flex>
       )}
     </div>
   );
